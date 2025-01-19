@@ -6,7 +6,7 @@ const besley = Besley({ subsets: ["latin"] });
 
 export const Logo = () => {
   return (
-    <div className="hidden items-center gap-x-2 md:flex">
+    <div className="flex items-center gap-x-2">
       <Image
         src="/icon-light.svg"
         width={50}

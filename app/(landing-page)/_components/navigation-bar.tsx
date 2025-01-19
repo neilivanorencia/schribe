@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/app/(landing-page)/_components/logo";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -15,7 +17,19 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 export const NavigationBar = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const spinnerColor = mounted
+    ? currentTheme === "dark"
+      ? "#6366f1"
+      : "#374151"
+    : "none";
 
   return (
     <div className="fixed top-0 z-50 w-full bg-opacity-10 backdrop-blur-lg backdrop-filter">
@@ -23,9 +37,7 @@ export const NavigationBar = () => {
         <div className="flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-x-2">
-            {isLoading && (
-              <BeatLoader color={theme === "dark" ? "#6366f1" : "#374151"} />
-            )}
+            {isLoading && <BeatLoader color={spinnerColor} size={8} />}
             {!isAuthenticated && !isLoading && (
               <>
                 <SignUpButton mode="modal">

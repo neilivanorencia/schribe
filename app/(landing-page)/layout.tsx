@@ -6,7 +6,7 @@ const LandingPageLayout = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cornsilk-200 via-cornsilk-400 to-cornsilk-600">
+    <div className="min-h-screen bg-gradient-to-br from-cornsilk-200 via-cornsilk-400 to-cornsilk-600 dark:from-indigo-950 dark:via-violet-950 dark:to-blue-950">
       <div>
         <NavigationBar />
         <div className="pt-20">
@@ -15,7 +15,7 @@ const LandingPageLayout = () => {
               <Header />
               <Hero />
             </div>
-            <footer className="mt-8 text-center text-sm text-gray-800 md:text-base">
+            <footer className="mt-8 text-center text-sm text-gray-800 dark:text-gray-100 md:text-base">
               Copyright &copy; {currentYear} Neil Ivan Orencia. All rights
               reserved.
             </footer>

@@ -38,7 +38,7 @@ export const Header = () => {
             asChild
           >
             <Link href="/documents">
-              <span className="mr-2">Get Started</span>
+              <span className="mr-2">Access Workspace</span>
               <FaRegHandPointRight
                 className={cn(
                   "inline-block scale-125 animate-pulse text-lg sm:text-xl md:text-2xl",

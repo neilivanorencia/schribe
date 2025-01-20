@@ -1,6 +1,6 @@
-import { Header } from "@/app/(landing-page)/_components/header";
-import { Hero } from "@/app/(landing-page)/_components/hero";
-import { NavigationBar } from "@/app/(landing-page)/_components/navigation-bar";
+import { Header } from '@/app/(landing-page)/_components/header';
+import { Hero } from '@/app/(landing-page)/_components/hero';
+import { NavigationBar } from '@/app/(landing-page)/_components/navigation-bar';
 
 const LandingPageLayout = () => {
   const currentYear = new Date().getFullYear();

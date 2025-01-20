@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -34,7 +34,7 @@ export function ModeToggle() {
       >
         <DropdownMenuItem
           onClick={() => setTheme("light")}
-          className="dark:hover:bg-indigo-700/50 flex cursor-pointer items-center gap-2 focus:bg-cornsilk-100 focus:outline-none dark:text-white"
+          className="flex cursor-pointer items-center gap-2 focus:bg-cornsilk-100 focus:outline-none dark:text-white dark:hover:bg-indigo-700/50"
         >
           <Sun className="h-4 w-4" />
           <span>Light</span>
@@ -48,7 +48,7 @@ export function ModeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
-          className="dark:hover:bg-indigo-700/50 flex cursor-pointer items-center gap-2 focus:bg-cornsilk-100 focus:outline-none dark:text-white"
+          className="flex cursor-pointer items-center gap-2 focus:bg-cornsilk-100 focus:outline-none dark:text-white dark:hover:bg-indigo-700/50"
         >
           <Settings className="h-4 w-4" />
           <span>System</span>

@@ -1,19 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import { Button } from "@/components/ui/button";
-import { Logo } from "@/app/(landing-page)/_components/logo";
-import { ModeToggle } from "@/components/mode-toggle";
-
-import { BeatLoader } from "react-spinners";
-import { cn } from "@/lib/utils";
-import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { IoAddCircleOutline, IoLogOutOutline } from "react-icons/io5";
+import { BeatLoader } from "react-spinners";
 
-import { IoAddCircleOutline } from "react-icons/io5";
-import { IoLogOutOutline } from "react-icons/io5";
+import { Logo } from "@/app/(landing-page)/_components/logo";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 
 export const NavigationBar = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();

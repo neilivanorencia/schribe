@@ -2,12 +2,11 @@
 
 import { useConvexAuth } from "convex/react";
 import { Besley } from "next/font/google";
+import Link from "next/link";
 import { FaRegHandPointDown, FaRegHandPointRight } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-import Link from "next/link";
 import { SignInButton } from "@clerk/clerk-react";
 
 const besley = Besley({ subsets: ["latin"] });

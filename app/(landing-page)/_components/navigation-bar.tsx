@@ -40,7 +40,7 @@ export const NavigationBar = () => {
                 <SignUpButton mode="modal">
                   <Button
                     size="icon"
-                    className="hidden rounded-lg border-2 border-gray-700 bg-gray-700 px-12 py-2 text-sm text-cornsilk-100 transition duration-300 ease-in-out hover:bg-transparent hover:text-gray-700 dark:border-violet-300 dark:bg-violet-300 dark:text-gray-800 dark:hover:bg-transparent dark:hover:text-violet-300 md:flex"
+                    className="rounded-lg border-2 border-gray-700 bg-gray-700 px-12 py-2 text-sm text-cornsilk-100 transition duration-300 ease-in-out hover:bg-transparent hover:text-gray-700 dark:border-violet-300 dark:bg-violet-300 dark:text-gray-800 dark:hover:bg-transparent dark:hover:text-violet-300"
                   >
                     Sign Up
                     <IoAddCircleOutline
@@ -51,7 +51,7 @@ export const NavigationBar = () => {
                 <SignInButton mode="modal">
                   <Button
                     size="icon"
-                    className="rounded-lg border-2 border-gray-500 bg-gray-500 px-12 py-2 text-sm text-cornsilk-100 transition duration-300 ease-in-out hover:bg-transparent hover:text-gray-700 dark:border-purple-400 dark:bg-purple-400 dark:text-gray-800 dark:hover:bg-transparent dark:hover:text-purple-400"
+                    className="hidden rounded-lg border-2 border-gray-500 bg-gray-500 px-12 py-2 text-sm text-cornsilk-100 transition duration-300 ease-in-out hover:bg-transparent hover:text-gray-700 dark:border-purple-400 dark:bg-purple-400 dark:text-gray-800 dark:hover:bg-transparent dark:hover:text-purple-400 md:flex"
                   >
                     Log In
                     <IoLogOutOutline className={cn("inline-block scale-125")} />

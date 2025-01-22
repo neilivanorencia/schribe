@@ -1,12 +1,13 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import React, { ElementRef, useEffect, useRef, useState } from "react";
-import { FiChevronsLeft } from "react-icons/fi";
-import { IoMenu } from "react-icons/io5";
-import { useMediaQuery } from "usehooks-ts";
+import { usePathname } from 'next/navigation';
+import React, { ElementRef, useEffect, useRef, useState } from 'react';
+import { FiChevronsLeft } from 'react-icons/fi';
+import { IoMenu } from 'react-icons/io5';
+import { useMediaQuery } from 'usehooks-ts';
 
-import { cn } from "@/lib/utils";
+import { UserItem } from '@/app/(main)/_components/user-item';
+import { cn } from '@/lib/utils';
 
 export const NavigationBar = () => {
   const pathname = usePathname();
@@ -106,7 +107,7 @@ export const NavigationBar = () => {
     <>
       <div
         className={cn(
-          "fixed inset-0 z-[99998] bg-black/50 transition-opacity",
+          "fixed inset-0 z-[99999] bg-black/50 transition-opacity",
           isCollapsed ? "hidden" : "block",
           !isMobile && "hidden",
         )}
@@ -131,7 +132,9 @@ export const NavigationBar = () => {
         >
           <FiChevronsLeft className="h-6 w-6 animate-bounce" />
         </div>
-        <div></div>
+        <div>
+          <UserItem/>
+        </div>
         <div className="mt-4"></div>
         {!isMobile && (
           <div

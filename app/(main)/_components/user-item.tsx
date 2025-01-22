@@ -39,7 +39,7 @@ export const UserItem = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-80 border-2 border-cornsilk-800 bg-cornsilk-700 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-indigo-700 dark:bg-indigo-800"
+        className="w-80 border-2 border-cornsilk-700 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-indigo-700 dark:bg-indigo-800"
         align="start"
         alignOffset={11}
         forceMount
@@ -52,7 +52,7 @@ export const UserItem = () => {
           </p>
           <div className="flex items-center gap-x-2 pb-2">
             {" "}
-            <Avatar className="h-12 w-12 rounded-md border-2 border-cornsilk-800 dark:border-indigo-700">
+            <Avatar className="h-12 w-12 rounded-md border-2 border-cornsilk-700 dark:border-indigo-700">
               <AvatarImage src={user.imageUrl} />
             </Avatar>
             <div className="space-y-[2px]">
@@ -69,7 +69,7 @@ export const UserItem = () => {
 
         <div className="py-2">
           {" "}
-          <DropdownMenuSeparator className="border-2 border-cornsilk-800 dark:border-indigo-700" />
+          <DropdownMenuSeparator className="border-2 border-cornsilk-700 dark:border-indigo-700" />
         </div>
 
         <div className="px-2 py-2 text-xs text-gray-800 dark:text-gray-300">
@@ -86,7 +86,7 @@ export const UserItem = () => {
         <DropdownMenuItem className="mt-1 focus:bg-transparent">
           {" "}
           <SignOutButton>
-            <div className="w-full cursor-pointer rounded-md px-3 py-1.5 text-sm text-gray-800 transition-colors hover:bg-cornsilk-600 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-indigo-700/80 dark:hover:text-gray-100">
+            <div className="w-full cursor-pointer rounded-md bg-cornsilk-600 px-3 py-1.5 text-center text-sm text-gray-800 transition-colors duration-500 ease-in-out hover:bg-cornsilk-700 hover:text-gray-900 dark:bg-indigo-700 dark:text-gray-200 dark:hover:bg-indigo-600 dark:hover:text-gray-100">
               Log Out
             </div>
           </SignOutButton>

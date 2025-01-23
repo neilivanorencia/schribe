@@ -24,24 +24,25 @@ export const UserItem = () => {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className="flex w-full cursor-pointer items-center p-3 text-sm transition duration-300 ease-in-out hover:bg-primary/5"
+          className="m-2 cursor-pointer rounded-lg bg-cornsilk-500 dark:bg-indigo-800"
         >
-          <div className="flex max-w-[150px] items-center gap-x-2">
-            <Avatar className="h-6 w-6 border-2 border-cornsilk-800 dark:border-indigo-700">
-              <AvatarImage src={user.imageUrl} />
-            </Avatar>
-            <span className="line-clamp-1 text-start text-gray-800 dark:text-gray-100">
-              {user.fullName}
-            </span>
+          <div className="flex w-full items-center p-3 text-sm">
+            <div className="flex max-w-[150px] items-center gap-x-2">
+              <Avatar className="h-6 w-6 border-2 border-cornsilk-800 dark:border-indigo-700">
+                <AvatarImage src={user.imageUrl} />
+              </Avatar>
+              <span className="line-clamp-1 text-start text-gray-800 dark:text-gray-100">
+                {user.fullName}
+              </span>
+            </div>
+            <ChevronsLeftRight className="ml-2 h-4 w-4 rotate-90 text-gray-800 dark:text-gray-100" />
           </div>
-          <ChevronsLeftRight className="ml-2 h-4 w-4 rotate-90 text-gray-800 dark:text-gray-100" />
         </div>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-80 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:bg-indigo-800 max-md:border-none md:border-2 md:border-cornsilk-600 dark:md:border-none"
+        className="w-80 rounded-lg border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
         align="start"
-        alignOffset={11}
         forceMount
       >
         <div className="flex flex-col space-y-3">

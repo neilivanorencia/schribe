@@ -1,17 +1,25 @@
 "use client";
 
-import { usePathname } from 'next/navigation';
-import React, { ElementRef, useEffect, useRef, useState } from 'react';
-import { FiChevronsLeft } from 'react-icons/fi';
-import { IoMenu } from 'react-icons/io5';
-import { useMediaQuery } from 'usehooks-ts';
+import { useMutation, useQuery } from "convex/react";
+import { usePathname } from "next/navigation";
+import React, { ElementRef, useEffect, useRef, useState } from "react";
+import { FiChevronsLeft } from "react-icons/fi";
+import { HiSearch } from "react-icons/hi";
+import { IoMenu, IoSettingsOutline } from "react-icons/io5";
+import { PiFilePlus } from "react-icons/pi";
+import { toast } from "sonner";
+import { useMediaQuery } from "usehooks-ts";
 
-import { UserItem } from '@/app/(main)/_components/user-item';
-import { cn } from '@/lib/utils';
+import { Item } from "@/app/(main)/_components/item";
+import { UserItem } from "@/app/(main)/_components/user-item";
+import { api } from "@/convex/_generated/api";
+import { cn } from "@/lib/utils";
 
 export const NavigationBar = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const documents = useQuery(api.documents.get);
+  const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -103,6 +111,16 @@ export const NavigationBar = () => {
     }
   };
 
+  const handleCreate = () => {
+    const promise = create({ title: "New Note" });
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: () => "Note successfully created!",
+      error: () => "Error creating note",
+    });
+  };
+
   return (
     <>
       <div
@@ -126,16 +144,37 @@ export const NavigationBar = () => {
           onClick={collapse}
           role="button"
           className={cn(
-            "absolute right-2 top-3 h-6 w-6 text-cornsilk-800 opacity-0 transition hover:text-cornsilk-900 group-hover/sidebar:opacity-100 dark:text-indigo-600 dark:hover:text-indigo-500",
+            "absolute right-4 top-6 h-6 w-6 text-cornsilk-800 opacity-0 transition hover:text-cornsilk-900 group-hover/sidebar:opacity-100 dark:text-indigo-600 dark:hover:text-indigo-500",
             isMobile && "opacity-100",
           )}
         >
           <FiChevronsLeft className="h-6 w-6 animate-bounce" />
         </div>
         <div>
-          <UserItem/>
+          <UserItem />
+          <Item
+            label="Search"
+            icon={<HiSearch />}
+            isSearch
+            onClick={() => {}}
+          />
+          <Item
+            label="Settings"
+            icon={<IoSettingsOutline />}
+            onClick={() => {}}
+          />
+          <Item onClick={handleCreate} label="New Note" icon={<PiFilePlus />} />
         </div>
-        <div className="mt-4"></div>
+        <div className="mt-4">
+          {documents?.map((document) => (
+            <p
+              className="text-gray-700 dark:text-indigo-300"
+              key={document._id}
+            >
+              {document.title}
+            </p>
+          ))}
+        </div>
         {!isMobile && (
           <div
             onMouseDown={handleMouseDown}

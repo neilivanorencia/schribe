@@ -39,24 +39,20 @@ export const UserItem = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-80 border-2 border-cornsilk-700 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-indigo-700 dark:bg-indigo-800"
+        className="w-80 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:bg-indigo-800 max-md:border-none md:border-2 md:border-cornsilk-600 dark:md:border-none"
         align="start"
         alignOffset={11}
         forceMount
       >
         <div className="flex flex-col space-y-3">
-          {" "}
           <p className="px-1 text-xs text-gray-800 dark:text-gray-300">
-            {" "}
             {user.emailAddresses[0].emailAddress}
           </p>
           <div className="flex items-center gap-x-2 pb-2">
-            {" "}
             <Avatar className="h-12 w-12 rounded-md border-2 border-cornsilk-700 dark:border-indigo-700">
               <AvatarImage src={user.imageUrl} />
             </Avatar>
             <div className="space-y-[2px]">
-              {" "}
               <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 {user.fullName}
               </p>

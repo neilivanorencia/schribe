@@ -1,4 +1,5 @@
 "use client";
+
 import { useTheme } from "next-themes";
 import { Inter } from "next/font/google";
 import { Toaster as Sonner } from "sonner";
@@ -17,13 +18,15 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "group toast group-[.toaster]:bg-white/10 group-[.toaster]:backdrop-blur-xl group-[.toaster]:border group-[.toaster]:border-white/20 group-[.toaster]:shadow-lg group-[.toaster]:rounded-lg text-base transition-all duration-200 hover:group-[.toaster]:bg-white/15",
-          description: "group-[.toast]:text-sm text-white/80",
+            "group toast group-[.toaster]:bg-gray-500 group-[.toaster]:text-cornsilk-100 group-[.toaster]:rounded-lg group-[.toaster]:shadow-lg transition-all duration-200 dark:group-[.toaster]:bg-purple-400 dark:group-[.toaster]:text-indigo-950 border-none outline-none text-base",
+          description:
+            "group-[.toast]:text-base text-cornsilk-100/80 dark:group-[.toast]:text-indigo-950/80",
           actionButton:
-            "group-[.toast]:bg-white/20 group-[.toast]:backdrop-blur-sm group-[.toast]:text-white group-[.toast]:hover:bg-white/30 text-sm font-medium transition-colors",
+            "group-[.toast]:bg-cornsilk-100/20 group-[.toast]:text-cornsilk-100 group-[.toast]:hover:bg-cornsilk-100/30 text-base font-medium transition-colors dark:group-[.toast]:bg-indigo-950/20 dark:group-[.toast]:text-indigo-950 dark:group-[.toast]:hover:bg-indigo-950/30",
           cancelButton:
-            "group-[.toast]:bg-white/10 group-[.toast]:backdrop-blur-sm group-[.toast]:text-white/80 group-[.toast]:hover:bg-white/20 text-xs transition-colors",
-          title: "group-[.toast]:text-white/90 font-medium",
+            "group-[.toast]:bg-cornsilk-100/10 group-[.toast]:text-cornsilk-100/80 group-[.toast]:hover:bg-cornsilk-100/20 text-sm transition-colors dark:group-[.toast]:bg-indigo-950/10 dark:group-[.toast]:text-indigo-950/80 dark:group-[.toast]:hover:bg-indigo-950/20",
+          title:
+            "group-[.toast]:text-cornsilk-100/90 font-medium text-base dark:group-[.toast]:text-indigo-950/90",
         },
       }}
       {...props}

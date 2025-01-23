@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 
-import { mutation } from "@/convex/_generated/server";
+import { Doc, Id } from "@/convex/_generated/dataModel";
+import { mutation, query } from "@/convex/_generated/server";
 
 export const create = mutation({
   args: {

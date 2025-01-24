@@ -2,17 +2,46 @@ import { v } from "convex/values";
 
 import { mutation, query } from "@/convex/_generated/server";
 
-export const get = query({
-  handler: async (ctx) => {
+export const getSidebar = query({
+  args: {
+    parentDocument: v.optional(v.id("documents")),
+  },
+  handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Unauthorized");
+      throw new Error("Not authenticated");
     }
 
-    const documents = await ctx.db.query("documents").collect();
+    const userId = identity.subject;
 
-    return documents;
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user_parent", (q) =>
+        q.eq("userId", userId).eq("parentDocument", args.parentDocument),
+      )
+      .filter((q) => q.eq(q.field("isArchived"), false))
+      .order("desc")
+      .collect();
+
+    const documentsWithHasChildren = await Promise.all(
+      documents.map(async (doc) => {
+        const children = await ctx.db
+          .query("documents")
+          .withIndex("by_user_parent", (q) =>
+            q.eq("userId", userId).eq("parentDocument", doc._id),
+          )
+          .filter((q) => q.eq(q.field("isArchived"), false))
+          .collect();
+
+        return {
+          ...doc,
+          hasChildren: children.length > 0,
+        };
+      }),
+    );
+
+    return documentsWithHasChildren;
   },
 });
 

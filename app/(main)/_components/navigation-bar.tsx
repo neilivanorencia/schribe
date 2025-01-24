@@ -1,24 +1,24 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
-import { usePathname } from "next/navigation";
-import React, { ElementRef, useEffect, useRef, useState } from "react";
-import { FiChevronsLeft } from "react-icons/fi";
-import { HiSearch } from "react-icons/hi";
-import { IoMenu, IoSettingsOutline } from "react-icons/io5";
-import { PiFilePlus } from "react-icons/pi";
-import { toast } from "sonner";
-import { useMediaQuery } from "usehooks-ts";
+import { useMutation } from 'convex/react';
+import { usePathname } from 'next/navigation';
+import React, { ElementRef, useEffect, useRef, useState } from 'react';
+import { FiChevronsLeft } from 'react-icons/fi';
+import { HiSearch } from 'react-icons/hi';
+import { IoMenu, IoSettingsOutline } from 'react-icons/io5';
+import { PiFilePlus } from 'react-icons/pi';
+import { toast } from 'sonner';
+import { useMediaQuery } from 'usehooks-ts';
 
-import { Item } from "@/app/(main)/_components/item";
-import { UserItem } from "@/app/(main)/_components/user-item";
-import { api } from "@/convex/_generated/api";
-import { cn } from "@/lib/utils";
+import { DocumentList } from '@/app/(main)/_components/document-list';
+import { Item } from '@/app/(main)/_components/item';
+import { UserItem } from '@/app/(main)/_components/user-item';
+import { api } from '@/convex/_generated/api';
+import { cn } from '@/lib/utils';
 
 export const NavigationBar = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef(false);
@@ -163,17 +163,10 @@ export const NavigationBar = () => {
             icon={<IoSettingsOutline />}
             onClick={() => {}}
           />
-          <Item onClick={handleCreate} label="New Note" icon={<PiFilePlus />} />
+          <Item onClick={handleCreate} label="Add Note" icon={<PiFilePlus />} />
         </div>
         <div className="mt-4">
-          {documents?.map((document) => (
-            <p
-              className="text-gray-700 dark:text-indigo-300"
-              key={document._id}
-            >
-              {document.title}
-            </p>
-          ))}
+          <DocumentList />
         </div>
         {!isMobile && (
           <div

@@ -26,10 +26,18 @@ export const Item = ({
   expanded,
   isSearch,
   level = 0,
+  onExpand,
   label,
   onClick,
   icon,
 }: ItemProps) => {
+  const handleExpand = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    onExpand?.();
+  };
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
@@ -44,7 +52,7 @@ export const Item = ({
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
     >
       {!!id && (
-        <div role="button" className="h-full mr-2.5">
+        <div role="button" className="mr-2.5 h-full" onClick={handleExpand}>
           <ChevronIcon className="h-4 w-4 shrink-0" />
         </div>
       )}

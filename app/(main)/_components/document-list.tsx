@@ -6,9 +6,9 @@ import { useState } from "react";
 import {
   PiFileText,
   PiFolderOpen,
+  PiFolderOpenFill,
   PiFolderSimple,
   PiFolderSimpleFill,
-  PiFolderOpenFill,
 } from "react-icons/pi";
 
 import { Item } from "@/app/(main)/_components/item";
@@ -41,6 +41,11 @@ export const DocumentList = ({
     parentDocument: parentDocumentId,
   });
 
+  const totalDocuments = useQuery(
+    api.documents.getTotalCount,
+    level === 0 ? {} : undefined,
+  );
+
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
@@ -61,7 +66,7 @@ export const DocumentList = ({
 
   return (
     <>
-      {level === 0 && documents.length === 0 && (
+      {level === 0 && documents.length === 0 && (totalDocuments ?? 0) > 0 && (
         <p
           className={cn("my-1 text-sm text-gray-600 dark:text-indigo-400")}
           style={{ paddingLeft: level ? `${level * 12 + 24}px` : undefined }}

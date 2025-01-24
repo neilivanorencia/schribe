@@ -2,12 +2,13 @@
 
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 
 interface ItemProps {
   id?: Id<"documents">;
-  documentIcon?: string;
+  documentIcon?: React.ReactNode;
   active?: boolean;
   expanded?: boolean;
   isSearch?: boolean;
@@ -43,14 +44,14 @@ export const Item = ({
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
     >
       {!!id && (
-        <div role="button" className="h-full">
+        <div role="button" className="h-full mr-2.5">
           <ChevronIcon className="h-4 w-4 shrink-0" />
         </div>
       )}
       {documentIcon ? (
-        <div className="mr-2 shrink-0 text-lg">{documentIcon}</div>
+        <div className="mr-2.5 shrink-0 text-lg">{documentIcon}</div>
       ) : (
-        <span className="mr-2 inline-block h-6 w-6 shrink-0 [&>svg]:h-full [&>svg]:w-full [&>svg]:text-current">
+        <span className="mr-2.5 inline-block h-6 w-6 shrink-0 [&>svg]:h-full [&>svg]:w-full [&>svg]:text-current">
           {icon}
         </span>
       )}
@@ -60,6 +61,18 @@ export const Item = ({
           <span className="text-xs">⌘</span>K
         </kbd>
       )}
+    </div>
+  );
+};
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      className="flex gap-x-2 py-1"
+      style={{ paddingLeft: level ? `${level * 12 + 24}px` : "12px" }}
+    >
+      <Skeleton className="h4 w-4" />
+      <Skeleton className="h4 w-[30%]" />
     </div>
   );
 };

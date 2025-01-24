@@ -1,10 +1,15 @@
 "use client";
 
+import { useMutation } from "convex/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FiPlus } from "react-icons/fi";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -17,6 +22,7 @@ interface ItemProps {
   label: string;
   onClick: () => void;
   icon: React.ReactNode;
+  hasChildren?: boolean;
 }
 
 export const Item = ({
@@ -30,12 +36,36 @@ export const Item = ({
   label,
   onClick,
   icon,
+  hasChildren,
 }: ItemProps) => {
+  const router = useRouter();
+  const create = useMutation(api.documents.create);
+
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     event.stopPropagation();
     onExpand?.();
+  };
+
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (!id) return;
+
+    const promise = create({ title: "New Note", parentDocument: id }).then(
+      (documentId) => {
+        if (!expanded) {
+          onExpand?.();
+        }
+        router.push(`documents/${documentId}`);
+      },
+    );
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: () => "Note successfully created!",
+      error: () => "Error creating note",
+    });
   };
 
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
@@ -45,29 +75,57 @@ export const Item = ({
       onClick={onClick}
       role="button"
       className={cn(
-        "group/item flex min-h-[28px] w-full items-center py-1 pr-3 text-sm text-gray-600 transition duration-300 ease-in-out hover:bg-cornsilk-700 hover:text-gray-700 dark:text-indigo-300 hover:dark:bg-indigo-800",
+        "group flex min-h-[28px] w-full items-center py-1 pr-3 text-sm text-gray-600 transition duration-300 ease-in-out hover:bg-cornsilk-700 hover:text-gray-700 dark:text-indigo-300 hover:dark:bg-indigo-800",
         active &&
           "bg-cornsilk-700 text-gray-700 dark:bg-indigo-800 dark:text-indigo-300",
       )}
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
     >
-      {!!id && (
-        <div role="button" className="mr-2.5 h-full" onClick={handleExpand}>
-          <ChevronIcon className="h-4 w-4 shrink-0" />
-        </div>
-      )}
-      {documentIcon ? (
-        <div className="mr-2.5 shrink-0 text-lg">{documentIcon}</div>
-      ) : (
-        <span className="mr-2.5 inline-block h-6 w-6 shrink-0 [&>svg]:h-full [&>svg]:w-full [&>svg]:text-current">
-          {icon}
-        </span>
-      )}
-      <span className="truncate">{label}</span>
+      <div className="mr-2.5 flex h-full items-center">
+        {!!id && (
+          <div
+            role="button"
+            className={cn(
+              "h-4 w-4",
+              !hasChildren && "pointer-events-none opacity-0",
+            )}
+            onClick={handleExpand}
+          >
+            <ChevronIcon className="h-4 w-4 shrink-0" />
+          </div>
+        )}
+      </div>
+
+      <div className="mr-0.5 flex h-6 w-6 shrink-0 items-center justify-center">
+        {documentIcon ? (
+          <div className="h-full w-full [&>svg]:h-full [&>svg]:w-full">
+            {documentIcon}
+          </div>
+        ) : (
+          <span className="h-full w-full [&>svg]:h-full [&>svg]:w-full">
+            {icon}
+          </span>
+        )}
+      </div>
+
+      <span className="ml-2.5 truncate">{label}</span>
+
       {isSearch && (
         <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded-sm bg-cornsilk-500 px-1.5 font-mono text-sm opacity-100 dark:bg-indigo-700">
           <span className="text-xs">⌘</span>K
         </kbd>
+      )}
+
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          <div
+            role="button"
+            onClick={onCreate}
+            className="ml-auto h-full opacity-0 group-hover:opacity-100"
+          >
+            <FiPlus className="h-4 w-4 text-gray-500 dark:text-indigo-500" />
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,15 +1,24 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FiPlus } from "react-icons/fi";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { toast } from "sonner";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
+import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -38,8 +47,22 @@ export const Item = ({
   icon,
   hasChildren,
 }: ItemProps) => {
+  const { user } = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
+  const archive = useMutation(api.documents.archive);
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (!id) return;
+
+    const promise = archive({ id });
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note moved to trash successfully!",
+      error: "Error moving note to trash",
+    });
+  };
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -118,6 +141,36 @@ export const Item = ({
 
       {!!id && (
         <div className="ml-auto flex items-center gap-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+              <div
+                role="button"
+                className="ml-auto h-full opacity-0 group-hover:opacity-100"
+              >
+                <MoreHorizontal className="h-4 w-4 text-gray-500 dark:text-indigo-500" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-60 border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+              align="start"
+              side="right"
+              forceMount
+            >
+              <DropdownMenuItem
+                onClick={onArchive}
+                className="cursor-pointer text-gray-600 transition-colors duration-500 ease-in-out hover:!bg-cornsilk-600 hover:text-gray-900 dark:text-indigo-200 dark:hover:!bg-indigo-700 dark:hover:text-indigo-100"
+              >
+                <HiOutlineTrash className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="border border-cornsilk-700 dark:border-indigo-700" />
+              <div className="p-2 text-xs text-gray-600 dark:text-indigo-200">
+                Last edited by{" "}
+                <span className="font-medium">{user?.fullName}</span>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <div
             role="button"
             onClick={onCreate}

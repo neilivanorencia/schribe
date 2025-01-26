@@ -1,20 +1,27 @@
 "use client";
 
-import { useMutation } from 'convex/react';
-import { usePathname } from 'next/navigation';
-import React, { ElementRef, useEffect, useRef, useState } from 'react';
-import { FiChevronsLeft } from 'react-icons/fi';
-import { HiSearch } from 'react-icons/hi';
-import { IoMenu, IoSettingsOutline } from 'react-icons/io5';
-import { PiFilePlus } from 'react-icons/pi';
-import { toast } from 'sonner';
-import { useMediaQuery } from 'usehooks-ts';
+import { useMutation } from "convex/react";
+import { usePathname } from "next/navigation";
+import React, { ElementRef, useEffect, useRef, useState } from "react";
+import { FiChevronsLeft } from "react-icons/fi";
+import { HiSearch } from "react-icons/hi";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { IoMenu, IoSettingsOutline } from "react-icons/io5";
+import { PiFilePlus } from "react-icons/pi";
+import { toast } from "sonner";
+import { useMediaQuery } from "usehooks-ts";
 
-import { DocumentList } from '@/app/(main)/_components/document-list';
-import { Item } from '@/app/(main)/_components/item';
-import { UserItem } from '@/app/(main)/_components/user-item';
-import { api } from '@/convex/_generated/api';
-import { cn } from '@/lib/utils';
+import { DocumentList } from "@/app/(main)/_components/document-list";
+import { Item } from "@/app/(main)/_components/item";
+import { Trash } from "@/app/(main)/_components/trash";
+import { UserItem } from "@/app/(main)/_components/user-item";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { api } from "@/convex/_generated/api";
+import { cn } from "@/lib/utils";
 
 export const NavigationBar = () => {
   const pathname = usePathname();
@@ -166,7 +173,18 @@ export const NavigationBar = () => {
           <Item onClick={handleCreate} label="Add Note" icon={<PiFilePlus />} />
         </div>
         <div className="mt-4">
-          <DocumentList />
+          <DocumentList level={1} />
+          <Popover>
+            <PopoverTrigger className="mt-4 w-full">
+              <Item label="Trash" icon={<HiOutlineTrash />} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="w-72 border-0 bg-cornsilk-500 p-0 shadow-none outline-none dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+              side={isMobile ? "bottom" : "right"}
+            >
+              <Trash />
+            </PopoverContent>
+          </Popover>
         </div>
         {!isMobile && (
           <div

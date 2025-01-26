@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery } from "convex/react";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { MdRestore } from "react-icons/md";
@@ -13,11 +13,15 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { IoTrashBinOutline } from "react-icons/io5";
+import { ConfirmDeleteModal } from "@/components/modals/confirm-delete";
+import { ConfirmRestoreModal } from "@/components/modals/confirm-restore";
 
 export const Trash = () => {
   const router = useRouter();
+  const params = useParams();
   const documents = useQuery(api.documents.getTrash);
   const restore = useMutation(api.documents.restore);
+  const remove = useMutation(api.documents.remove);
 
   const [search, setSearch] = useState("");
 
@@ -29,17 +33,26 @@ export const Trash = () => {
     router.push(`/documents/${documentId}`);
   };
 
-  const onRestore = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    documentId: Id<"documents">,
-  ) => {
-    event.stopPropagation();
+  const onRestore = (documentId: Id<"documents">) => {
     const promise = restore({ id: documentId });
     toast.promise(promise, {
       loading: "Restoring note...",
       success: () => "Note successfully restored!",
       error: () => "Error restoring note",
     });
+  };
+
+  const onRemove = (documentId: Id<"documents">) => {
+    const promise = remove({ id: documentId });
+    toast.promise(promise, {
+      loading: "Deleting note...",
+      success: () => "Note successfully deleted!",
+      error: () => "Error deleting note",
+    });
+
+    if (params.documentId === documentId) {
+      router.push("/documents");
+    }
   };
 
   const { theme, systemTheme } = useTheme();
@@ -73,7 +86,7 @@ export const Trash = () => {
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="h-7 border-2 border-cornsilk-600 bg-transparent px-2 text-gray-600 outline-none placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:border-indigo-700 dark:text-indigo-200 dark:placeholder:text-indigo-400"
+          className="h-7 border-2 border-cornsilk-600 bg-transparent px-2 text-gray-600 outline-none placeholder:text-cornsilk-700 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:border-indigo-700 dark:text-indigo-200 dark:placeholder:text-indigo-400"
           placeholder="Filter by page title"
         />
       </div>
@@ -92,19 +105,19 @@ export const Trash = () => {
               {document.title}
             </span>
             <div className="flex items-center">
-              <div
-                onClick={(event) => onRestore(event, document._id)}
-                role="button"
-                className="p-1"
+              <ConfirmRestoreModal
+                onConfirm={() => onRestore(document._id)}
+                onClick={(event: React.MouseEvent) => event.stopPropagation()}
               >
-                <MdRestore className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
-              </div>
-              <div
-                role="button"
-                className="p-1"
-              >
-                <IoTrashBinOutline className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
-              </div>
+                <div role="button" className="p-1">
+                  <MdRestore className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
+                </div>
+              </ConfirmRestoreModal>
+              <ConfirmDeleteModal onConfirm={() => onRemove(document._id)}>
+                <div role="button" className="p-1">
+                  <IoTrashBinOutline className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
+                </div>
+              </ConfirmDeleteModal>
             </div>
           </div>
         ))}

@@ -88,7 +88,7 @@ export const DocumentList = ({
               icon={<PiFileText className="h-4 w-4" />}
               documentIcon={
                 document.hasChildren ? (
-                  level === 0 ? (
+                  level === 1 ? (
                     showFilled ? (
                       <PiFolderSimpleFill className="h-4 w-4" />
                     ) : (

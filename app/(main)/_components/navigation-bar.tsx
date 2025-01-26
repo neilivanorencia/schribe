@@ -21,9 +21,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { api } from "@/convex/_generated/api";
+import { useSearch } from "@/hooks/use-search";
 import { cn } from "@/lib/utils";
 
 export const NavigationBar = () => {
+  const search = useSearch();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -163,7 +165,7 @@ export const NavigationBar = () => {
             label="Search"
             icon={<HiSearch />}
             isSearch
-            onClick={() => {}}
+            onClick={search.onOpen}
           />
           <Item
             label="Settings"

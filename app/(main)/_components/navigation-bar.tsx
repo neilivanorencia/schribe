@@ -1,7 +1,8 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useParams, usePathname } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { HiSearch } from "react-icons/hi";
@@ -13,6 +14,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { DocumentList } from "@/app/(main)/_components/document-list";
 import { Item } from "@/app/(main)/_components/item";
+import { Navigation } from "@/app/(main)/_components/navigation";
 import { Trash } from "@/app/(main)/_components/trash";
 import { UserItem } from "@/app/(main)/_components/user-item";
 import {
@@ -24,11 +26,11 @@ import { api } from "@/convex/_generated/api";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 export const NavigationBar = () => {
   const search = useSearch();
   const settings = useSettings();
+  const params = useParams();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -171,7 +173,7 @@ export const NavigationBar = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar py-2 relative z-[99999] flex h-full flex-col bg-[#ddd4b5] dark:bg-[#312e81]",
+          "group/sidebar relative z-[99999] flex h-full flex-col bg-[#ddd4b5] py-2 dark:bg-[#312e81]",
           isResetting && "transition-all duration-300 ease-in-out",
           isMobile ? "fixed w-0 max-w-[85%]" : "w-60",
           "scrollbar-custom overflow-y-auto",
@@ -237,15 +239,19 @@ export const NavigationBar = () => {
           isMobile ? "left-0 w-full" : "left-60 w-[calc(100%-240px)]",
         )}
       >
-        <nav className="w-full px-3 py-2">
-          {isCollapsed && (
-            <IoMenu
-              onClick={resetWidth}
-              role="button"
-              className="h-6 w-6 text-cornsilk-700 transition hover:text-cornsilk-800 dark:text-indigo-700 dark:hover:text-indigo-600"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navigation isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="w-full px-3 py-2">
+            {isCollapsed && (
+              <IoMenu
+                onClick={resetWidth}
+                role="button"
+                className="h-6 w-6 text-cornsilk-700 transition hover:text-cornsilk-800 dark:text-indigo-700 dark:hover:text-indigo-600"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );

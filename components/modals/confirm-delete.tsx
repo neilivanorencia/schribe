@@ -34,13 +34,14 @@ export const ConfirmDeleteModal = ({
       <AlertDialogTrigger onClick={(event) => event.stopPropagation()} asChild>
         {children}
       </AlertDialogTrigger>
-      <AlertDialogContent className="rounded-md border-none bg-cornsilk-300 outline-none dark:bg-indigo-900">
+      <AlertDialogContent className="rounded-none border-none bg-cornsilk-300 outline-none dark:bg-indigo-900 sm:rounded-md">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-gray-700 dark:text-indigo-300">
             Are you sure?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-gray-500 dark:text-indigo-400">
-            This action will permanently delete this note and it is irreversible.
+            This action will permanently delete this note and it is
+            irreversible.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

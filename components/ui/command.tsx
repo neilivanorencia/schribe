@@ -15,7 +15,7 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-cornsilk-500 text-popover-foreground dark:bg-indigo-800",
+      "flex h-full w-full flex-col overflow-hidden rounded-none sm:rounded-lg bg-cornsilk-500 text-popover-foreground dark:bg-indigo-800",
       className,
     )}
     {...props}
@@ -30,6 +30,27 @@ const CommandDialog = ({ children, ...props }: DialogProps) => {
         <Command className="bg-cornsilk-500 dark:bg-indigo-800 [&_[cmdk-group-heading]]:text-gray-600 [&_[cmdk-group-heading]]:dark:text-indigo-200 [&_[cmdk-input]]:text-gray-800 [&_[cmdk-input]]:dark:text-indigo-100">
           {children}
         </Command>
+        <style>{`
+          .scrollbar-custom {
+            scrollbar-gutter: stable;
+          }
+          .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+          }
+          .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: transparent;
+            transition: opacity 0.2s;
+          }
+          .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+            background: #ddd5b6;
+          }
+          .dark .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+            background: #4338ca;
+          }
+          .scrollbar-custom::-webkit-scrollbar-track {
+            background: transparent;
+          }
+        `}</style>
       </DialogContent>
     </Dialog>
   );
@@ -63,7 +84,10 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+    className={cn(
+      "scrollbar-custom max-h-[290px] overflow-y-auto overflow-x-hidden",
+      className,
+    )}
     {...props}
   />
 ));

@@ -24,6 +24,7 @@ import { api } from "@/convex/_generated/api";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 export const NavigationBar = () => {
   const search = useSearch();
@@ -37,6 +38,7 @@ export const NavigationBar = () => {
   const navbarRef = useRef<ElementRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   useEffect(() => {
     if (isMobile) {
@@ -122,6 +124,10 @@ export const NavigationBar = () => {
     }
   };
 
+  const { theme, systemTheme } = useTheme();
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   const handleCreate = () => {
     const promise = create({ title: "New Note" });
 
@@ -134,9 +140,29 @@ export const NavigationBar = () => {
 
   return (
     <>
+      <style>
+        {`
+          .scrollbar-custom {
+            scrollbar-gutter: stable;
+          }
+          .scrollbar-custom::-webkit-scrollbar {
+            width: 3px;
+          }
+          .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: transparent;
+            transition: opacity 0.2s;
+          }
+          .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+            background: ${currentTheme === "dark" ? "#4f46e5" : "#c5bda0"};
+          }
+          .scrollbar-custom::-webkit-scrollbar-track {
+            background: transparent;
+          }
+        `}
+      </style>
       <div
         className={cn(
-          "fixed inset-0 z-[99999] bg-black/50 transition-opacity",
+          "scrollbar-custom fixed inset-0 z-[99999] bg-black/50 transition-opacity",
           isCollapsed ? "hidden" : "block",
           !isMobile && "hidden",
         )}
@@ -145,17 +171,17 @@ export const NavigationBar = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar relative z-[99999] flex h-full flex-col bg-[#ddd4b5] dark:bg-[#312e81]",
+          "group/sidebar py-2 relative z-[99999] flex h-full flex-col bg-[#ddd4b5] dark:bg-[#312e81]",
           isResetting && "transition-all duration-300 ease-in-out",
           isMobile ? "fixed w-0 max-w-[85%]" : "w-60",
-          "overflow-y-auto",
+          "scrollbar-custom overflow-y-auto",
         )}
       >
         <div
           onClick={collapse}
           role="button"
           className={cn(
-            "absolute right-4 top-6 h-6 w-6 text-cornsilk-800 opacity-0 transition hover:text-cornsilk-900 group-hover/sidebar:opacity-100 dark:text-indigo-600 dark:hover:text-indigo-500",
+            "absolute right-4 top-8 h-6 w-6 text-cornsilk-800 opacity-0 transition hover:text-cornsilk-900 group-hover/sidebar:opacity-100 dark:text-indigo-600 dark:hover:text-indigo-500",
             isMobile && "opacity-100",
           )}
         >
@@ -178,15 +204,20 @@ export const NavigationBar = () => {
         </div>
         <div className="mt-4">
           <DocumentList level={1} />
-          <Popover>
+          <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
             <PopoverTrigger className="mt-4 w-full">
               <Item label="Trash" icon={<HiOutlineTrash />} />
             </PopoverTrigger>
             <PopoverContent
-              className="w-72 border-0 bg-cornsilk-500 p-0 shadow-none outline-none dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+              className="z-[99999] mx-1 my-2 w-72 border-0 bg-cornsilk-500 p-0 shadow-none outline-none dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
               side={isMobile ? "bottom" : "right"}
+              align={isMobile ? "start" : "center"}
+              collisionPadding={isMobile ? 16 : 0}
+              style={
+                isMobile ? { marginLeft: "4px", width: "calc(100% - 8px)" } : {}
+              }
             >
-              <Trash />
+              <Trash onClose={() => setIsPopoverOpen(false)} />
             </PopoverContent>
           </Popover>
         </div>
@@ -194,7 +225,7 @@ export const NavigationBar = () => {
           <div
             onMouseDown={handleMouseDown}
             onClick={resetWidth}
-            className="absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-cornsilk-700 opacity-0 transition group-hover/sidebar:opacity-100 dark:bg-indigo-800"
+            className="absolute right-0 top-0 h-full w-4 cursor-ew-resize bg-transparent opacity-0 dark:bg-transparent"
           />
         )}
       </aside>

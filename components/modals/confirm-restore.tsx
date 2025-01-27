@@ -35,7 +35,7 @@ export const ConfirmRestoreModal = ({
       <AlertDialogTrigger onClick={(event) => event.stopPropagation()} asChild>
         {children}
       </AlertDialogTrigger>
-      <AlertDialogContent className="rounded-md border-none bg-cornsilk-300 outline-none dark:bg-indigo-900">
+      <AlertDialogContent className="rounded-none border-none bg-cornsilk-300 outline-none dark:bg-indigo-900 sm:rounded-md">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-gray-700 dark:text-indigo-300">
             Are you sure?
@@ -46,13 +46,13 @@ export const ConfirmRestoreModal = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className="transition-all ease-in-out duration-500 border-none bg-cornsilk-600 text-cornsilk-900 hover:bg-cornsilk-700 hover:text-cornsilk-950 dark:bg-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-700"
+            className="border-none bg-cornsilk-600 text-cornsilk-900 transition-all duration-500 ease-in-out hover:bg-cornsilk-700 hover:text-cornsilk-950 dark:bg-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-700"
             onClick={(event) => event.stopPropagation()}
           >
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="transition-all ease-in-out duration-500 border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
+            className="border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 transition-all duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
             onClick={handleConfirm}
           >
             Restore

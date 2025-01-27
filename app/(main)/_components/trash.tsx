@@ -16,7 +16,11 @@ import { IoTrashBinOutline } from "react-icons/io5";
 import { ConfirmDeleteModal } from "@/components/modals/confirm-delete";
 import { ConfirmRestoreModal } from "@/components/modals/confirm-restore";
 
-export const Trash = () => {
+interface TrashProps {
+  onClose: () => void;
+}
+
+export const Trash = ({ onClose }: TrashProps) => {
   const router = useRouter();
   const params = useParams();
   const documents = useQuery(api.documents.getTrash);
@@ -34,7 +38,9 @@ export const Trash = () => {
   };
 
   const onRestore = (documentId: Id<"documents">) => {
-    const promise = restore({ id: documentId });
+    const promise = restore({ id: documentId }).finally(() => {
+      onClose();
+    });
     toast.promise(promise, {
       loading: "Restoring note...",
       success: () => "Note successfully restored!",
@@ -43,7 +49,9 @@ export const Trash = () => {
   };
 
   const onRemove = (documentId: Id<"documents">) => {
-    const promise = remove({ id: documentId });
+    const promise = remove({ id: documentId }).finally(() => {
+      onClose();
+    });
     toast.promise(promise, {
       loading: "Deleting note...",
       success: () => "Note successfully deleted!",
@@ -78,7 +86,27 @@ export const Trash = () => {
   }
 
   return (
-    <div className="text-sm">
+    <div className="px-0 py-2 md:px-2 text-sm">
+      <style>
+        {`
+          .scrollbar-custom {
+            scrollbar-gutter: stable;
+          }
+          .scrollbar-custom::-webkit-scrollbar {
+            width: 3px;
+          }
+          .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: transparent;
+            transition: opacity 0.2s;
+          }
+          .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+            background: ${currentTheme === "dark" ? "#4f46e5" : "#ddd5b6"};
+          }
+          .scrollbar-custom::-webkit-scrollbar-track {
+            background: transparent;
+          }
+        `}
+      </style>
       <div className="flex items-center gap-x-2 p-2">
         <div className="rounded-md border-2 border-cornsilk-600 p-1.5 dark:border-indigo-700">
           <HiOutlineSearch className="h-4 w-4 text-cornsilk-700 dark:text-indigo-400" />
@@ -86,11 +114,11 @@ export const Trash = () => {
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="h-7 border-2 border-cornsilk-600 bg-transparent px-2 text-gray-600 outline-none placeholder:text-cornsilk-700 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:border-indigo-700 dark:text-indigo-200 dark:placeholder:text-indigo-400"
+          className="h-7 border-2 border-cornsilk-600 bg-transparent px-2 text-sm text-gray-600 outline-none placeholder:text-cornsilk-700 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:border-indigo-700 dark:text-indigo-200 dark:placeholder:text-indigo-400"
           placeholder="Filter by page title"
         />
       </div>
-      <div className="mt-2 px-1 pb-2">
+      <div className="scrollbar-custom mt-2 max-h-[282px] overflow-y-hidden px-1 pb-2 hover:overflow-y-auto">
         <p className="hidden pb-2 text-center text-gray-500 last:block dark:text-indigo-200">
           No notes found
         </p>
@@ -105,16 +133,21 @@ export const Trash = () => {
               {document.title}
             </span>
             <div className="flex items-center">
-              <ConfirmRestoreModal
-                onConfirm={() => onRestore(document._id)}
-                onClick={(event: React.MouseEvent) => event.stopPropagation()}
-              >
-                <div role="button" className="p-1">
+              <ConfirmRestoreModal onConfirm={() => onRestore(document._id)}>
+                <div
+                  role="button"
+                  className="p-1"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <MdRestore className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
                 </div>
               </ConfirmRestoreModal>
               <ConfirmDeleteModal onConfirm={() => onRemove(document._id)}>
-                <div role="button" className="p-1">
+                <div
+                  role="button"
+                  className="p-1"
+                  onClick={(e) => e.stopPropagation()} // Only stop propagation here
+                >
                   <IoTrashBinOutline className="h-5 w-5 text-cornsilk-800 dark:text-indigo-500" />
                 </div>
               </ConfirmDeleteModal>

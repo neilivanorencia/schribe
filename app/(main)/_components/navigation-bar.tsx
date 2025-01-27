@@ -22,10 +22,12 @@ import {
 } from "@/components/ui/popover";
 import { api } from "@/convex/_generated/api";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
 
 export const NavigationBar = () => {
   const search = useSearch();
+  const settings = useSettings();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -170,7 +172,7 @@ export const NavigationBar = () => {
           <Item
             label="Settings"
             icon={<IoSettingsOutline />}
-            onClick={() => {}}
+            onClick={settings.onOpen}
           />
           <Item onClick={handleCreate} label="Add Note" icon={<PiFilePlus />} />
         </div>

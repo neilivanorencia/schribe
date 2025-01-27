@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import '@/app/globals.css';
+import "@/app/globals.css";
 
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
-import { ConvexClientProvider } from '@/components/convex-provider';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
+import { ConvexClientProvider } from "@/components/convex-provider";
+import { ModalProvider } from "@/components/modal-provider";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,6 +46,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Toaster />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

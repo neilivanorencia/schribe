@@ -52,10 +52,10 @@ export const ConfirmRestoreModal = ({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="transition-all ease-in-out duration-500 border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-600"
+            className="transition-all ease-in-out duration-500 border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
             onClick={handleConfirm}
           >
-            Continue
+            Restore
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -40,7 +40,7 @@ export const ConfirmDeleteModal = ({
             Are you sure?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-gray-500 dark:text-indigo-400">
-            This action is irreversible.
+            This action will permanently delete this note and it is irreversible.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -51,10 +51,10 @@ export const ConfirmDeleteModal = ({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 transition-all duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-600"
+            className="border-2 border-cornsilk-700 bg-transparent text-cornsilk-900 transition-all duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
             onClick={handleConfirm}
           >
-            Continue
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

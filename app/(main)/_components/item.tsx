@@ -3,8 +3,13 @@
 import { useMutation } from "convex/react";
 import { ChevronDown, ChevronRight, MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { HiOutlineTrash } from "react-icons/hi2";
+import {
+  HiOutlineFolderOpen,
+  HiOutlinePencilSquare,
+  HiOutlineTrash,
+} from "react-icons/hi2";
 import { toast } from "sonner";
 
 import {
@@ -51,6 +56,70 @@ export const Item = ({
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const updateDocument = useMutation(api.documents.update);
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState(label);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setValue(label);
+    }
+  }, [label, isEditing]);
+
+  const handleRenameStart = () => {
+    setIsEditing(true);
+    setTimeout(() => {
+      inputRef.current?.focus();
+      inputRef.current?.setSelectionRange(0, value.length);
+    }, 0);
+  };
+
+  const handleBlur = () => {
+    const finalValue = value.trim() || "Untitled";
+
+    if (finalValue !== label && id) {
+      updateDocument({ id, title: finalValue }).catch(() => {
+        toast.error("Failed to update title");
+        setValue(label);
+      });
+    }
+
+    setIsEditing(false);
+    setValue(finalValue);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      inputRef.current?.blur();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    timeoutRef.current = setTimeout(() => {
+      if (id && newValue.trim() !== label) {
+        const finalValue = newValue.trim() || "Untitled";
+        updateDocument({ id, title: finalValue }).catch(() => {
+          toast.error("Failed to update title");
+          setValue(label);
+        });
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
@@ -77,9 +146,7 @@ export const Item = ({
 
     const promise = create({ title: "New Note", parentDocument: id }).then(
       (documentId) => {
-        if (!expanded) {
-          onExpand?.();
-        }
+        if (!expanded) onExpand?.();
         router.push(`documents/${documentId}`);
       },
     );
@@ -101,6 +168,7 @@ export const Item = ({
         "group flex min-h-[28px] w-full items-center py-1 pr-3 text-sm text-gray-600 transition duration-300 ease-in-out hover:bg-cornsilk-700 hover:text-gray-700 dark:text-indigo-300 hover:dark:bg-indigo-800",
         active &&
           "bg-cornsilk-700 text-gray-700 dark:bg-indigo-800 dark:text-indigo-300",
+        isEditing && "bg-cornsilk-700 dark:bg-indigo-800",
       )}
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
     >
@@ -131,7 +199,19 @@ export const Item = ({
         )}
       </div>
 
-      <span className="ml-2.5 truncate">{label}</span>
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          className="ml-2.5 min-w-0 flex-1 truncate bg-transparent outline-none"
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <span className="ml-2.5 truncate">{value}</span>
+      )}
 
       {isSearch && (
         <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded-sm bg-cornsilk-500 px-1.5 font-mono text-sm opacity-100 dark:bg-indigo-700">
@@ -151,16 +231,30 @@ export const Item = ({
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-60 border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+              className="w-60 border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-indigo-700 dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
               align="start"
               side="right"
               forceMount
             >
               <DropdownMenuItem
+                onClick={() => router.push(`/documents/${id}`)}
+                className="cursor-pointer text-gray-600 transition-colors duration-500 ease-in-out hover:!bg-cornsilk-600 hover:text-gray-900 dark:text-indigo-200 dark:hover:!bg-indigo-700 dark:hover:text-indigo-100"
+              >
+                <HiOutlineFolderOpen className="mr-2 h-4 w-4" />
+                Open
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={handleRenameStart}
+                className="cursor-pointer text-gray-600 transition-colors duration-500 ease-in-out hover:!bg-cornsilk-600 hover:text-gray-900 dark:text-indigo-200 dark:hover:!bg-indigo-700 dark:hover:text-indigo-100"
+              >
+                <HiOutlinePencilSquare className="mr-2 h-4 w-4" />
+                Rename
+              </DropdownMenuItem>
+              <DropdownMenuItem
                 onClick={onArchive}
                 className="cursor-pointer text-gray-600 transition-colors duration-500 ease-in-out hover:!bg-cornsilk-600 hover:text-gray-900 dark:text-indigo-200 dark:hover:!bg-indigo-700 dark:hover:text-indigo-100"
               >
-                <HiOutlineTrash className="h-4 w-4" />
+                <HiOutlineTrash className="mr-2 h-4 w-4" />
                 Delete
               </DropdownMenuItem>
               <DropdownMenuSeparator className="border border-cornsilk-700 dark:border-indigo-700" />

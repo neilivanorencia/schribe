@@ -89,26 +89,24 @@ export const NavigationBar = () => {
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
-  const resetWidth = () => {
-    if (sidebarRef.current && navbarRef.current) {
-      setIsCollapsed(false);
-      setIsResetting(true);
+const resetWidth = () => {
+  if (sidebarRef.current && navbarRef.current) {
+    setIsCollapsed(false);
+    setIsResetting(true);
 
-      if (isMobile) {
-        document.body.style.overflow = "hidden";
-        sidebarRef.current.style.width = "85%";
-        navbarRef.current.style.setProperty("width", "15%");
-        navbarRef.current.style.setProperty("left", "85%");
-      } else {
-        document.body.style.overflow = "";
-        sidebarRef.current.style.width = "240px";
-        navbarRef.current.style.setProperty("width", "calc(100% - 240px)");
-        navbarRef.current.style.setProperty("left", "240px");
-      }
-
-      setTimeout(() => setIsResetting(false), 300);
+    if (isMobile) {
+      document.body.style.overflow = "hidden";
+      sidebarRef.current.style.width = "90%";
+    } else {
+      document.body.style.overflow = "";
+      sidebarRef.current.style.width = "240px";
+      navbarRef.current.style.setProperty("width", "calc(100% - 240px)");
+      navbarRef.current.style.setProperty("left", "240px");
     }
-  };
+
+    setTimeout(() => setIsResetting(false), 300);
+  }
+};
 
   const collapse = () => {
     if (sidebarRef.current && navbarRef.current) {
@@ -232,7 +230,7 @@ export const NavigationBar = () => {
       <div
         ref={navbarRef}
         className={cn(
-          "absolute top-0 z-[99999]",
+          "absolute top-0 z-[99998]",
           isResetting && "transition-all duration-300 ease-in-out",
           isMobile ? "left-0 w-full" : "left-60 w-[calc(100%-240px)]",
         )}

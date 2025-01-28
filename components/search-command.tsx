@@ -56,18 +56,19 @@ export const SearchCommand = () => {
       <CommandInput placeholder="Search..." />
       <CommandList>
         <CommandEmpty>No results found</CommandEmpty>
-        <CommandGroup heading="Notes">
+        <CommandGroup className="py-2">
           {documents?.map((document) => (
             <CommandItem
               key={document._id}
               value={`${document._id}-${document.title}`}
               title={document.title}
               onSelect={onSelect}
+              className="rounded-md m-1"
             >
               {document.icon ? (
-                <p className="mr-1 text-lg">{document.icon}</p>
+                <p className="mr-1 flex-shrink-0 text-lg">{document.icon}</p>
               ) : (
-                <GoFile className="mr-1 h-4 w-4 text-gray-600 dark:text-indigo-300" />
+                <GoFile className="mr-1 h-5 w-5 flex-shrink-0 text-gray-600 dark:text-indigo-300" />
               )}
               <span className="text-gray-600 dark:text-indigo-300">
                 {document.title}

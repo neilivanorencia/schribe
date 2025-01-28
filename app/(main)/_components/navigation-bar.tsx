@@ -91,24 +91,24 @@ export const NavigationBar = () => {
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
-const resetWidth = () => {
-  if (sidebarRef.current && navbarRef.current) {
-    setIsCollapsed(false);
-    setIsResetting(true);
+  const resetWidth = () => {
+    if (sidebarRef.current && navbarRef.current) {
+      setIsCollapsed(false);
+      setIsResetting(true);
 
-    if (isMobile) {
-      document.body.style.overflow = "hidden";
-      sidebarRef.current.style.width = "90%";
-    } else {
-      document.body.style.overflow = "";
-      sidebarRef.current.style.width = "240px";
-      navbarRef.current.style.setProperty("width", "calc(100% - 240px)");
-      navbarRef.current.style.setProperty("left", "240px");
+      if (isMobile) {
+        document.body.style.overflow = "hidden";
+        sidebarRef.current.style.width = "90%";
+      } else {
+        document.body.style.overflow = "";
+        sidebarRef.current.style.width = "240px";
+        navbarRef.current.style.setProperty("width", "calc(100% - 240px)");
+        navbarRef.current.style.setProperty("left", "240px");
+      }
+
+      setTimeout(() => setIsResetting(false), 300);
     }
-
-    setTimeout(() => setIsResetting(false), 300);
-  }
-};
+  };
 
   const collapse = () => {
     if (sidebarRef.current && navbarRef.current) {
@@ -209,7 +209,7 @@ const resetWidth = () => {
               <Item label="Trash" icon={<HiOutlineTrash />} />
             </PopoverTrigger>
             <PopoverContent
-              className="z-[99999] mx-1 my-2 w-72 border-0 bg-cornsilk-500 p-0 shadow-none outline-none dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+              className="z-[99999] mx-1 my-2 w-72 border-2 border-cornsilk-600 bg-cornsilk-500 p-0 shadow-none outline-none dark:border-indigo-700 dark:bg-indigo-800"
               side={isMobile ? "bottom" : "right"}
               align={isMobile ? "start" : "center"}
               collisionPadding={isMobile ? 16 : 0}

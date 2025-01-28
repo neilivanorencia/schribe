@@ -43,7 +43,8 @@ export const SearchCommand = () => {
   }, [toggle]);
 
   const onSelect = (id: string) => {
-    router.push(`/documents/${id}`);
+    const documentId = id.split("-")[0];
+    router.push(`/documents/${documentId}`);
     onClose();
   };
 
@@ -63,7 +64,7 @@ export const SearchCommand = () => {
               value={`${document._id}-${document.title}`}
               title={document.title}
               onSelect={onSelect}
-              className="rounded-md m-1"
+              className="m-1 rounded-md"
             >
               {document.icon ? (
                 <p className="mr-1 flex-shrink-0 text-lg">{document.icon}</p>

@@ -4,6 +4,8 @@ import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { IoMenu } from "react-icons/io5";
 
+import { Banner } from "@/app/(main)/_components/banner";
+import { Menu } from "@/app/(main)/_components/menu";
 import { Title } from "@/app/(main)/_components/title";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -20,6 +22,10 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
     documentId: params.documentId as Id<"documents">,
   });
 
+  if (document === undefined || document === null) {
+    return null;
+  }
+
   if (document === null) {
     return null;
   }
@@ -35,9 +41,13 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
           />
         )}
         <div className="flex w-full items-center justify-between">
-          {document && <Title initialData={document} />}
+          <Title initialData={document} />
+          <div className="flex items-center gap-x-2">
+            <Menu documentId={document._id} />
+          </div>
         </div>
       </nav>
+      {document?.isArchived && <Banner documentId={document._id} />}
     </>
   );
 };

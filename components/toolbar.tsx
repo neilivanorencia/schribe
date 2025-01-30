@@ -22,6 +22,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const [value, setValue] = useState(initialData.title);
 
   const update = useMutation(api.documents.update);
+  const removeIcon = useMutation(api.documents.removeIcon);
 
   const enableInput = () => {
     if (preview) return;
@@ -50,21 +51,34 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     }
   };
 
+  const onIconSelect = (icon: string) => {
+    update({
+      id: initialData._id,
+      icon,
+    });
+  };
+
+  const onRemoveIcon = () => {
+    removeIcon({
+      id: initialData._id,
+    });
+  };
+
   return (
     <div className="group relative pl-8">
       {!!initialData.icon && !preview && (
         <div className="group/icon flex items-center gap-x-2 pt-6">
-          <EmojiPickerComponent onChange={() => {}}>
-            <p className="text-6xl transition hover:opacity-75">
+          <EmojiPickerComponent onChange={onIconSelect}>
+            <p className="text-5xl transition hover:opacity-75 sm:text-6xl">
               {initialData.icon}
             </p>
           </EmojiPickerComponent>
           <Button
-            className="rounded-full text-xs opacity-0 transition group-hover/icon:opacity-100"
+            className="rounded-xl border-2 border-cornsilk-700 bg-transparent hover:bg-cornsilk-600 dark:bg-transparent dark:border-indigo-700 dark:hover:bg-indigo-800 text-xs opacity-0 transition duration-300 ease-in-out group-hover/icon:opacity-100"
             size="icon"
-            onClick={() => {}}
+            onClick={onRemoveIcon}
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4 text-gray-500 dark:text-indigo-400" />
           </Button>
         </div>
       )}
@@ -73,7 +87,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       )}
       <div className="flex items-center gap-x-2 py-4 opacity-100 group-hover:opacity-100">
         {!initialData.icon && !preview && (
-          <EmojiPickerComponent asChild onChange={() => {}}>
+          <EmojiPickerComponent asChild onChange={onIconSelect}>
             <Button
               className="border-2 border-cornsilk-700 bg-transparent text-sm font-normal text-gray-600 transition duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
               size="sm"

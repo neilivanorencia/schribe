@@ -41,7 +41,7 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
           />
         )}
         <div className="flex w-full items-center justify-between">
-          <Title initialData={document} />
+          <Title initialData={document} showIcon={false} />
           <div className="flex items-center gap-x-2">
             <Menu documentId={document._id} />
           </div>

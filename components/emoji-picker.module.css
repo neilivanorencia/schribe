@@ -1,0 +1,108 @@
+.customPicker {
+  height: 350px;
+}
+
+.customPicker :global(.EmojiPickerReact) {
+  --epr-bg-color: hsl(47, 71%, 88%);
+  --epr-category-label-bg-color: var(--epr-bg-color);
+  --epr-text-color: #333333;
+  --epr-active-bg-color: hsla(47, 24%, 70%, 0.2);
+  --epr-focus-bg-color: var(--epr-active-bg-color);
+  --epr-hover-bg-color: var(--epr-active-bg-color);
+  --epr-search-input-border-color: hsl(47, 24%, 70%);
+
+  border: 2px solid var(--epr-search-input-border-color);
+  backdrop-filter: blur(16px);
+  height: 100%;
+  width: 100%;
+}
+
+.customPicker :global(.EmojiPickerReact.epr-dark-theme) {
+  --epr-bg-color: hsl(244, 55%, 41%);
+  --epr-category-label-bg-color: var(--epr-bg-color);
+  --epr-category-label-border-top: 2px solid var(--epr-bg-color);
+  --epr-text-color: #ffffff;
+  --epr-hover-bg-color: hsla(243, 76%, 59%, 0.2);
+  --epr-active-bg-color: var(--epr-hover-bg-color);
+  --epr-focus-bg-color: var(--epr-hover-bg-color);
+  --epr-search-input-border-color: hsl(243, 76%, 59%);
+
+  border: 2px solid var(--epr-search-input-border-color);
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-category-label) {
+  background: var(--epr-category-label-bg-color) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-emoji-category-label) {
+  position: static !important;
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-body::-webkit-scrollbar) {
+  width: 10px;
+  border-left: 1px solid var(--epr-search-input-border-color);
+}
+
+.customPicker
+  :global(.EmojiPickerReact)
+  :global(.epr-body::-webkit-scrollbar-track) {
+  background: var(--epr-bg-color);
+}
+
+.customPicker
+  :global(.EmojiPickerReact)
+  :global(.epr-body::-webkit-scrollbar-thumb) {
+  background: var(--epr-search-input-border-color);
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-search-container input) {
+  border: 1px solid var(--epr-search-input-border-color) !important;
+  background: transparent !important;
+}
+
+.customPicker
+  :global(.EmojiPickerReact)
+  :global(.epr-search-container input:focus),
+.customPicker
+  :global(.EmojiPickerReact)
+  :global(.epr-search-container input:active) {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--epr-search-input-border-color) !important;
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-emoji:hover) {
+  background: var(--epr-hover-bg-color) !important;
+}
+
+.customPicker :global(.EmojiPickerReact) :global(*) {
+  font-family: var(--epr-font-family);
+  font-weight: 400;
+  border-top: none;
+}
+
+.customPicker :global(.EmojiPickerReact) :global(.epr-emoji-native) {
+  font-size: 2rem !important;
+}
+
+@media (max-width: 640px) {
+  .customPicker :global(.EmojiPickerReact) :global(.epr-emoji) {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+  }
+
+  .customPicker :global(.EmojiPickerReact) :global(.epr-emoji-native) {
+    font-size: 1.6rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .customPicker :global(.EmojiPickerReact) :global(.epr-category-label) {
+    font-size: 0.8rem !important;
+  }
+}

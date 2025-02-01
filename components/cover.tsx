@@ -46,7 +46,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
       {url && !preview && (
         <div className="absolute bottom-5 right-5 flex items-center gap-x-2 opacity-0 transition duration-300 ease-in-out group-hover:opacity-100">
           <Button
-            onClick={coverImage.onOpen}
+            onClick={() => coverImage.onReplace(url)}
             className="border-2 border-gray-500 bg-transparent text-xs font-normal text-gray-600 transition duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800 md:text-sm"
             size="sm"
           >

@@ -32,12 +32,12 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
 
   return (
     <>
-      <nav className="flex w-full items-center px-3 py-6">
+      <nav className="flex w-full items-center bg-cornsilk-400 px-3 py-4 dark:bg-indigo-900 sm:dark:bg-indigo-800">
         {isCollapsed && (
           <IoMenu
             onClick={onResetWidth}
             role="button"
-            className="h-6 w-6 text-cornsilk-700 transition hover:text-cornsilk-800 dark:text-indigo-700 dark:hover:text-indigo-600"
+            className="h-6 w-6 text-cornsilk-700 transition hover:text-cornsilk-800 dark:text-indigo-600 dark:hover:text-indigo-500"
           />
         )}
         <div className="flex w-full items-center justify-between">

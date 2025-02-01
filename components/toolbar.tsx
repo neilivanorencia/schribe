@@ -10,6 +10,7 @@ import { EmojiPickerComponent } from "@/components/emoji-picker";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
+import { useCoverImage } from "@/hooks/use-cover-image";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -64,6 +65,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     });
   };
 
+  const coverImage = useCoverImage();
+
   return (
     <div className="group relative pl-8">
       {!!initialData.icon && !preview && (
@@ -74,7 +77,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             </p>
           </EmojiPickerComponent>
           <Button
-            className="rounded-xl border-2 border-cornsilk-700 bg-transparent hover:bg-cornsilk-600 dark:bg-transparent dark:border-indigo-700 dark:hover:bg-indigo-800 text-xs opacity-0 transition duration-300 ease-in-out group-hover/icon:opacity-100"
+            className="rounded-xl border-2 border-cornsilk-700 bg-transparent text-xs opacity-0 transition duration-300 ease-in-out hover:bg-cornsilk-600 group-hover/icon:opacity-100 dark:border-indigo-700 dark:bg-transparent dark:hover:bg-indigo-800"
             size="icon"
             onClick={onRemoveIcon}
           >
@@ -98,7 +101,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         )}
         {!initialData.coverImage && !preview && (
           <Button
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             className="border-2 border-cornsilk-700 bg-transparent text-sm font-normal text-gray-600 transition duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800"
             size="sm"
           >

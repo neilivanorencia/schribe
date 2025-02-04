@@ -49,15 +49,19 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             onClick={() => coverImage.onReplace(url)}
             className="border-2 border-gray-500 bg-transparent text-xs font-normal text-gray-600 transition duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800 md:text-sm"
             size="sm"
+            aria-label="Change cover"
           >
-            <BsImages className="h-4 w-4" /> Change cover
+            <BsImages className="h-4 w-4" />
+            <span className="ml-2 hidden md:inline">Change cover</span>
           </Button>
           <Button
             onClick={onRemove}
             className="border-2 border-gray-500 bg-transparent text-xs font-normal text-gray-600 transition duration-500 ease-in-out hover:bg-cornsilk-600 dark:border-indigo-600 dark:text-indigo-300 dark:hover:bg-indigo-800 md:text-sm"
             size="sm"
+            aria-label="Remove cover"
           >
-            <IoImageOutline className="h-4 w-4" /> Remove cover
+            <IoImageOutline className="h-4 w-4" />
+            <span className="ml-2 hidden md:inline">Remove cover</span>
           </Button>
         </div>
       )}

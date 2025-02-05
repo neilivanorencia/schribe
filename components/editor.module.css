@@ -1,0 +1,29 @@
+.customBlocknoteEditor {
+  position: relative;
+  scrollbar-width: thin;
+}
+
+.customBlocknoteEditor::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.customBlocknoteEditor {
+  scrollbar-color: var(--bn-scrollbar-thumb) transparent;
+  scrollbar-width: thin;
+}
+
+.customBlocknoteEditor :global(.bn-toolbar),
+.customBlocknoteEditor :global(.bn-menu) {
+  gap: 8px !important;
+  padding: 4px !important;
+}
+
+.customBlocknoteEditor :global(.bn-toolbar),
+.customBlocknoteEditor :global(.bn-menu),
+.customBlocknoteEditor :global(.bn-popover) {
+  z-index: 99998 !important;
+}
+
+.customBlocknoteEditor :global(.bn-container) {
+  z-index: auto !important;
+}

@@ -2,7 +2,7 @@
 
 import { useMutation } from "convex/react";
 import { useTheme } from "next-themes";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { HiSearch } from "react-icons/hi";
@@ -28,6 +28,7 @@ import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
 
 export const NavigationBar = () => {
+  const router = useRouter();
   const search = useSearch();
   const settings = useSettings();
   const params = useParams();
@@ -129,7 +130,9 @@ const resetWidth = () => {
   const currentTheme = theme === "system" ? systemTheme : theme;
 
   const handleCreate = () => {
-    const promise = create({ title: "New Note" });
+    const promise = create({ title: "New Note" }).then((documentId) =>
+      router.push(`/documents/${documentId}`),
+    );
 
     toast.promise(promise, {
       loading: "Creating note...",

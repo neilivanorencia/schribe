@@ -68,7 +68,9 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const coverImage = useCoverImage();
 
   return (
-    <div className="group relative pl-8">
+    <div
+      className={`group relative pl-14 ${initialData.isArchived ? "mt-10" : ""}`}
+    >
       {!!initialData.icon && !preview && (
         <div className="group/icon flex items-center gap-x-2 pt-6">
           <EmojiPickerComponent onChange={onIconSelect}>
@@ -88,7 +90,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       {!!initialData.icon && preview && (
         <p className="pt-6 text-6xl">{initialData.icon}</p>
       )}
-      <div className="flex items-center gap-x-2 py-4 opacity-100 group-hover:opacity-100">
+      <div className="flex items-center gap-x-2 pb-3 pt-6 opacity-100 group-hover:opacity-100">
         {!initialData.icon && !preview && (
           <EmojiPickerComponent asChild onChange={onIconSelect}>
             <Button

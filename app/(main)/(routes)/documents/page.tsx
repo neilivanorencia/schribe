@@ -2,6 +2,7 @@
 
 import { useMutation } from "convex/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { MdNoteAdd } from "react-icons/md";
 import { SlPencil } from "react-icons/sl";
 import { toast } from "sonner";
@@ -11,13 +12,14 @@ import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
 
 const DocumentsPage = () => {
+  const router = useRouter();
   const { user } = useUser();
   const create = useMutation(api.documents.create);
 
   const onCreate = () => {
     const promise = create({
       title: "New Note",
-    });
+    }).then((documentId) => router.push(`/documents/${documentId}`));
 
     toast.promise(promise, {
       loading: "Creating note...",

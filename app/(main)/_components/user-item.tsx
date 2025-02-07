@@ -41,7 +41,7 @@ export const UserItem = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-80 rounded-lg border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-none dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
+        className="w-80 rounded-lg border-0 bg-cornsilk-500 p-2 shadow-none outline-none transition duration-500 ease-in-out dark:border-2 dark:border-indigo-700 dark:bg-indigo-800 md:border-2 md:border-cornsilk-600"
         align="start"
         forceMount
       >

@@ -32,7 +32,7 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
 
   return (
     <>
-      <nav className="flex w-full items-center bg-cornsilk-400 px-3 py-4 dark:bg-indigo-900 sm:dark:bg-indigo-800">
+      <nav className="flex w-full items-center border-b-2 border-cornsilk-600 bg-cornsilk-400 px-3 py-4 dark:border-b-2 dark:border-indigo-700 dark:bg-indigo-900 sm:dark:bg-indigo-800">
         {isCollapsed && (
           <IoMenu
             onClick={onResetWidth}

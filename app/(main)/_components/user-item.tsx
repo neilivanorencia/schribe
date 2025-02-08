@@ -24,7 +24,7 @@ export const UserItem = () => {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className="m-2 cursor-pointer rounded-lg bg-cornsilk-500 dark:bg-indigo-800"
+          className="m-2 cursor-pointer rounded-lg bg-cornsilk-500 dark:bg-indigo-700"
         >
           <div className="flex w-full items-center p-3 text-sm">
             <div className="flex max-w-[150px] items-center gap-x-2">

@@ -119,7 +119,7 @@ export const Trash = ({ onClose }: TrashProps) => {
         />
       </div>
       <div className="scrollbar-custom mt-2 max-h-[282px] overflow-y-hidden px-1 pb-2 hover:overflow-y-auto">
-        <p className="hidden pb-2 text-center text-gray-500 last:block dark:text-indigo-200">
+        <p className="hidden pb-2 text-center text-gray-700 last:block dark:text-indigo-200">
           No notes found
         </p>
         {filteredDocuments?.map((document) => (
@@ -129,7 +129,7 @@ export const Trash = ({ onClose }: TrashProps) => {
             onClick={() => onClick(document._id)}
             className="flex w-full items-center justify-between rounded-sm hover:bg-cornsilk-600 dark:hover:bg-indigo-700"
           >
-            <span className="truncate pl-2 text-gray-500 dark:text-indigo-300">
+            <span className="truncate pl-2 text-gray-700 dark:text-indigo-300">
               {document.title}
             </span>
             <div className="flex items-center">

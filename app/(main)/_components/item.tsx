@@ -165,9 +165,9 @@ export const Item = ({
       onClick={onClick}
       role="button"
       className={cn(
-        "group flex min-h-[28px] w-full items-center py-1 pr-3 text-sm text-gray-600 transition duration-300 ease-in-out hover:bg-cornsilk-700 hover:text-gray-700 dark:text-indigo-300 hover:dark:bg-indigo-800",
+        "group flex min-h-[28px] w-full items-center py-1 pr-3 text-sm text-gray-700 transition duration-300 ease-in-out hover:bg-cornsilk-700 hover:text-gray-700 dark:text-indigo-300 hover:dark:bg-indigo-700",
         active &&
-          "bg-cornsilk-700 text-gray-700 dark:bg-indigo-800 dark:text-indigo-300",
+          "bg-cornsilk-700 text-gray-700 dark:bg-indigo-700 dark:text-indigo-300",
         isEditing && "bg-cornsilk-700 dark:bg-indigo-800",
       )}
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}

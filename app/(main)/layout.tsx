@@ -36,7 +36,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   const isDark = currentTheme === "dark";
-  const trackColor = isDark ? "hsl(242, 47%,34%)" : "hsl(47, 24%, 70%)";
+  const trackColor = isDark ? "hsl(242, 47%,34%)" : "rgb(221, 212, 181)";
   const thumbColor = isDark ? "hsl(245, 58%, 51%)" : "hsl(47, 71%, 88%)";
 
   return (
@@ -47,7 +47,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
 
-      <style jsx global>{`
+      <style jsx>{`
         .scrollbar-custom::-webkit-scrollbar-track {
           background: ${trackColor};
         }

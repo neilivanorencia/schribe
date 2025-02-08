@@ -35,8 +35,8 @@ export function ModeToggle() {
           onClick={() => setTheme("light")}
           className={`flex cursor-pointer items-center gap-2 px-4 py-2 focus:outline-none dark:text-white ${
             theme === "light"
-              ? "!bg-cornsilk-600 dark:!bg-indigo-700/50"
-              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-700/50"
+              ? "!bg-cornsilk-600 dark:!bg-indigo-600"
+              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-600"
           }`}
         >
           <Sun className="h-4 w-4" />
@@ -47,8 +47,8 @@ export function ModeToggle() {
           onClick={() => setTheme("dark")}
           className={`flex cursor-pointer items-center gap-2 px-4 py-2 focus:outline-none dark:text-white ${
             theme === "dark"
-              ? "!bg-cornsilk-600 dark:!bg-indigo-700/50"
-              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-700/50"
+              ? "!bg-cornsilk-600 dark:!bg-indigo-600"
+              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-600"
           }`}
         >
           <Moon className="h-4 w-4" />
@@ -59,8 +59,8 @@ export function ModeToggle() {
           onClick={() => setTheme("system")}
           className={`flex cursor-pointer items-center gap-2 px-4 py-2 focus:outline-none dark:text-white ${
             theme === "system"
-              ? "!bg-cornsilk-600 dark:!bg-indigo-700/50"
-              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-700/50"
+              ? "!bg-cornsilk-600 dark:!bg-indigo-600"
+              : "hover:!bg-cornsilk-600 dark:hover:!bg-indigo-600"
           }`}
         >
           <Settings className="h-4 w-4" />

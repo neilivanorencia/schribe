@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 
 import { Banner } from "@/app/(main)/_components/banner";
 import { Menu } from "@/app/(main)/_components/menu";
+import { Publish } from "@/app/(main)/_components/publish";
 import { Title } from "@/app/(main)/_components/title";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -43,6 +44,7 @@ export const Navigation = ({ isCollapsed, onResetWidth }: NavigationProps) => {
         <div className="flex w-full items-center justify-between">
           <Title initialData={document} showIcon={false} />
           <div className="flex items-center gap-x-2">
+            <Publish initialData={document} />
             <Menu documentId={document._id} />
           </div>
         </div>

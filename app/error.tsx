@@ -26,7 +26,7 @@ const Error = () => {
         Something went wrong
       </h2>
       <Button className="rounded-lg border-2 border-gray-700 bg-gray-700 text-sm text-cornsilk-100 transition duration-300 ease-in-out hover:bg-transparent hover:text-gray-700 dark:border-violet-300 dark:bg-violet-300 dark:text-gray-800 dark:hover:bg-transparent dark:hover:text-violet-300 sm:text-base" asChild>
-        <Link href="/documents">Go back</Link>
+        <Link href="/">Go back</Link>
       </Button>
     </div>
   );

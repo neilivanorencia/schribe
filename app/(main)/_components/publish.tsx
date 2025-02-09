@@ -57,7 +57,7 @@ export const Publish = ({ initialData }: PublishProps) => {
 
     toast.promise(promise, {
       loading: "Unpublishing note...",
-      success: () => "Successfully removed note from publication!",
+      success: () => "Note successfully unpublished!",
       error: () => "Error unpublishing note",
     });
   };

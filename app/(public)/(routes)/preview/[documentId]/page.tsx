@@ -6,6 +6,7 @@ import { useMemo } from "react";
 
 import { Cover } from "@/components/cover";
 import { Toolbar } from "@/components/toolbar";
+import WordCounter from "@/components/word-counter";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 
@@ -47,6 +48,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
           onChange={onChange}
           initialContent={document.content}
         />
+        <WordCounter content={document.content} />
       </div>
     </div>
   );

@@ -85,3 +85,12 @@ Schribe is a minimalistic note-taking web application for capturing and organizi
   <summary>See screenshot</summary><br>
 <img src="https://i.imgur.com/JTjbBE4.png" alt="Schribe Public Note Dissemination" />
 </details>
+
+## Technology Stack
+
+- **Clerk** - An authentication platform offering social, passwordless, and multi-factor login options, basic user management and more.
+- **Next.js** - A powerful React framework used for building fast and optimized web applications.
+- **React** - A JavaScript library made by Facebook primarily used for building user interfaces for web applications.
+- **shadcn/ui** - A UI component library specifically designed for building user interfaces in web applications using React.
+- **Tailwind CSS** - A utility-first CSS framework that allows for quick and flexible styling using predefined classes.
+- **Typescript** - A strongly typed programming language that builds on JavaScript by adding static types.

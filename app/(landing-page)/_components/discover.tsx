@@ -57,6 +57,31 @@ export const Discover = () => {
           </div>
         </div>
       </div>
+
+      <div className="group relative h-full cursor-pointer overflow-hidden rounded-2xl bg-gradient-to-b from-sienna-100 to-sienna-50 p-[2px] transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-sienna-100/20 dark:from-blue-800 dark:to-blue-900 dark:hover:shadow-blue-900/20 md:rounded-3xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-sienna-200/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-700/30" />
+        <div className="flex h-full overflow-hidden rounded-2xl md:rounded-3xl">
+          <div className="flex w-1/3 items-center justify-center bg-sienna-100 p-4 dark:bg-blue-800">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sienna-200 transition-all duration-300 group-hover:bg-sienna-300 dark:bg-blue-700 dark:group-hover:bg-blue-600 md:h-24 md:w-24">
+              <FaFolderOpen className="h-8 w-8 text-sienna-400 transition-transform duration-300 group-hover:-translate-y-1 dark:text-blue-300 md:h-12 md:w-12" />
+            </div>
+          </div>
+          <div className="w-2/3 bg-sienna-50 p-4 dark:bg-blue-900 md:p-6">
+            <h3
+              className={`${besley.className} mb-2 text-lg font-medium leading-5 text-sienna-500 dark:text-blue-300 md:mb-3 md:text-2xl md:leading-9 lg:text-3xl`}
+            >
+              Adaptable for Productivity
+            </h3>
+            <p
+              className={`${inter.className} text-xs font-normal leading-[1.25] text-sienna-800 dark:text-slate-200 md:text-base`}
+            >
+              Offers a flexible architecture that conforms to diverse user
+              workflows. Its structural design allows for note organization that
+              aligns with individual thought processes to enhance productivity.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

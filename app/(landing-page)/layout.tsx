@@ -1,6 +1,7 @@
 "use client";
 
 import { Discover } from "@/app/(landing-page)/_components/discover";
+import { Features } from "@/app/(landing-page)/_components/features";
 import { Header } from "@/app/(landing-page)/_components/header";
 import { Hero } from "@/app/(landing-page)/_components/hero";
 import { NavigationBar } from "@/app/(landing-page)/_components/navigation-bar";
@@ -26,6 +27,7 @@ const LandingPageLayout = () => {
           >
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
               <Discover />
+              <Features />
             </div>
           </section>
         </div>

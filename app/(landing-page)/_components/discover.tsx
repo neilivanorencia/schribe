@@ -32,6 +32,31 @@ export const Discover = () => {
           </div>
         </div>
       </div>
+
+      <div className="group relative h-full cursor-pointer overflow-hidden rounded-2xl bg-gradient-to-b from-mustard-100 to-mustard-50 p-[2px] transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-mustard-100/20 dark:from-indigo-800 dark:to-indigo-900 dark:hover:shadow-indigo-900/20 md:rounded-3xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-mustard-200/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-indigo-700/30" />
+        <div className="flex h-full overflow-hidden rounded-2xl md:rounded-3xl">
+          <div className="flex w-1/3 items-center justify-center bg-mustard-100 p-4 dark:bg-indigo-800">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-mustard-300 transition-all duration-300 group-hover:bg-mustard-400 dark:bg-indigo-700 dark:group-hover:bg-indigo-600 md:h-24 md:w-24">
+              <FaSync className="h-8 w-8 text-mustard-600 transition-transform duration-300 group-hover:rotate-180 dark:text-indigo-300 md:h-12 md:w-12" />
+            </div>
+          </div>
+          <div className="w-2/3 bg-mustard-50 p-4 dark:bg-indigo-900 md:p-6">
+            <h3
+              className={`${besley.className} mb-2 text-lg font-medium leading-5 text-mustard-700 dark:text-indigo-300 md:mb-3 md:text-2xl md:leading-9 lg:text-3xl`}
+            >
+              Effortless Sync and Organization
+            </h3>
+            <p
+              className={`${inter.className} text-xs font-normal leading-[1.25] text-mustard-900 dark:text-slate-200 md:text-base`}
+            >
+              Characterized by minimalist design and advanced organizational
+              capabilities. Its architecture facilitates content creation and
+              manipulation through a block-based editing system of notes.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

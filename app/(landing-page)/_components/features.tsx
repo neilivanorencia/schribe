@@ -165,6 +165,46 @@ export const Features = () => {
             </p>
           </div>
         </div>
+
+        <div className="flex flex-col items-center gap-6 sm:flex-row">
+          <div className="relative flex w-full flex-1 justify-center">
+            <div className="relative aspect-square w-full max-w-[500px]">
+              <div className="dark:hidden">
+                <Image
+                  src="/notebook-light.svg"
+                  alt="Archive Notes"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <div className="hidden dark:block">
+                <Image
+                  src="/notebook-dark.svg"
+                  alt="Archive Notes"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col justify-center text-center sm:px-4 sm:text-left">
+            <h3
+              className={`${besley.className} mb-3 text-2xl font-semibold text-gray-800 dark:text-indigo-300 md:text-4xl`}
+            >
+              Archive Notes
+            </h3>
+            <p
+              className={`${inter.className} text-sm text-gray-700 dark:text-indigo-100 md:text-xl`}
+            >
+              Incorporates an archive functionality to provide a safeguard for
+              note deletion. Upon initial deletion, notes are moved to a trash
+              archive, granting users a recovery period to reinstate notes if
+              needed.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -110,6 +110,39 @@ export const Example = () => {
           </button>
         ))}
       </div>
+
+      <div className="mt-8 w-full md:mt-12">
+        <div
+          className={`relative aspect-[1440/900] transition-opacity duration-300 ${
+            fade ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <div className="absolute inset-0 overflow-hidden rounded-xl border-2 border-cornsilk-600 transition duration-500 ease-in-out dark:border-indigo-900 md:rounded-2xl">
+            <div className="relative h-full w-full dark:hidden">
+              <Image
+                src={imageSources[activeImage].light}
+                alt={`${activeImage} example`}
+                fill
+                className="object-contain object-center"
+                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 1440px"
+                quality={90}
+                priority
+              />
+            </div>
+            <div className="relative hidden h-full w-full dark:block">
+              <Image
+                src={imageSources[activeImage].dark}
+                alt={`${activeImage} example`}
+                fill
+                className="object-contain object-center"
+                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 1440px"
+                quality={90}
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

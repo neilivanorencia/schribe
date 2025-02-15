@@ -33,5 +33,52 @@ export const Example = () => {
     }, 300);
   };
 
+  const getButtonClasses = (key: ImageKey) => {
+    const baseClasses =
+      "flex items-center justify-center gap-1 rounded-lg p-2 md:p-3 transition-colors";
+
+    if (key === "more") {
+      return `${baseClasses} ${
+        activeImage === key
+          ? "border-2 border-gray-600 bg-gray-400 text-gray-600 dark:border-indigo-700 dark:text-indigo-400 dark:bg-indigo-800"
+          : "border-2 border-gray-600 bg-transparent text-gray-600 dark:border-indigo-700 dark:text-indigo-400"
+      }`;
+    }
+
+    const isActive = activeImage === key;
+
+    const lightStyles = {
+      journal: isActive
+        ? "border-2 border-azure-400 bg-azure-50 text-azure-700"
+        : "border-2 border-azure-400 bg-transparent text-azure-700",
+      documents: isActive
+        ? "border-2 border-mustard-600 bg-mustard-50 text-mustard-900"
+        : "border-2 border-mustard-600 bg-transparent text-mustard-900",
+      tasks: isActive
+        ? "border-2 border-sienna-400 bg-sienna-50 text-sienna-700"
+        : "border-2 border-sienna-400 bg-transparent text-sienna-700",
+      recipes: isActive
+        ? "border-2 border-pistachio-600 bg-pistachio-50 text-pistachio-900"
+        : "border-2 border-pistachio-600 bg-transparent text-pistachio-900",
+    };
+
+    const darkStyles = {
+      journal: isActive
+        ? "dark:border-violet-800 dark:bg-violet-900 dark:text-violet-400"
+        : "dark:border-violet-800 dark:bg-transparent dark:text-violet-400",
+      documents: isActive
+        ? "dark:border-purple-800 dark:bg-purple-900 dark:text-purple-400"
+        : "dark:border-purple-800 dark:bg-transparent dark:text-purple-400",
+      tasks: isActive
+        ? "dark:border-blue-800 dark:bg-blue-900 dark:text-blue-400"
+        : "dark:border-blue-800 dark:bg-transparent dark:text-blue-400",
+      recipes: isActive
+        ? "dark:border-sky-800 dark:bg-sky-900 dark:text-sky-400"
+        : "dark:border-sky-800 dark:bg-transparent dark:text-sky-400",
+    };
+
+    return `${baseClasses} ${lightStyles[key]} ${darkStyles[key]}`;
+  };
+
   return <div className="mx-auto max-w-7xl py-16"></div>;
 };

@@ -80,5 +80,36 @@ export const Example = () => {
     return `${baseClasses} ${lightStyles[key]} ${darkStyles[key]}`;
   };
 
-  return <div className="mx-auto max-w-7xl py-16"></div>;
+  return (
+    <div className="mx-auto max-w-7xl py-16">
+      <div className="grid grid-cols-5 gap-2 md:gap-4">
+        {(
+          ["journal", "documents", "tasks", "recipes", "more"] as ImageKey[]
+        ).map((key) => (
+          <button
+            key={key}
+            onClick={() => handleImageChange(key)}
+            className={getButtonClasses(key)}
+          >
+            {
+              {
+                journal: <IoBookOutline className="h-5 w-5 md:h-6 md:w-6" />,
+                documents: (
+                  <IoDocumentOutline className="h-5 w-5 md:h-6 md:w-6" />
+                ),
+                tasks: <GoTasklist className="h-5 w-5 md:h-6 md:w-6" />,
+                recipes: (
+                  <IoFastFoodOutline className="h-5 w-5 md:h-6 md:w-6" />
+                ),
+                more: <IoGridOutline className="h-5 w-5 md:h-6 md:w-6" />,
+              }[key]
+            }
+            <span className="hidden md:inline md:text-base">
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 };

@@ -12,5 +12,17 @@ export const Footer = ({ currentYear }: { currentYear: number }) => {
     });
   };
 
+  useEffect(() => {
+    const checkScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
+    window.addEventListener("scroll", checkScroll);
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, []);
+
   return <footer></footer>;
 };

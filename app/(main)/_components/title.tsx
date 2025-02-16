@@ -60,7 +60,7 @@ export const Title = ({ initialData, showIcon = true }: TitleProps) => {
           onChange={onChange}
           value={title}
           className={cn(
-            "h-9 max-w-xs border-none bg-transparent px-4 text-gray-800 outline-none transition-colors duration-500 ease-in-out placeholder:text-gray-600 hover:bg-transparent dark:bg-transparent dark:text-gray-200 dark:placeholder:text-indigo-400 hover:dark:bg-transparent md:max-w-sm",
+            "h-9 max-w-[160px] border-none bg-transparent px-4 text-gray-800 outline-none transition-colors duration-500 ease-in-out placeholder:text-gray-600 hover:bg-transparent dark:bg-transparent dark:text-gray-200 dark:placeholder:text-indigo-400 hover:dark:bg-transparent sm:max-w-xs md:max-w-sm",
             "border-none ring-0",
             "focus:outline-none focus:ring-0",
             "focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-cornsilk-700 focus-visible:ring-offset-0",
@@ -70,7 +70,7 @@ export const Title = ({ initialData, showIcon = true }: TitleProps) => {
         <Button
           onClick={enableInput}
           className={cn(
-            "h-9 max-w-xs border-none bg-transparent px-4 font-normal text-gray-800 outline-none transition-colors duration-500 ease-in-out hover:bg-transparent dark:bg-transparent dark:text-gray-200 hover:dark:bg-transparent md:max-w-sm",
+            "h-9 max-w-[160px] border-none bg-transparent px-4 font-normal text-gray-800 outline-none transition-colors duration-500 ease-in-out hover:bg-transparent dark:bg-transparent dark:text-gray-200 hover:dark:bg-transparent sm:max-w-xs md:max-w-sm",
             "border-none ring-0",
             "focus:outline-none focus:ring-0",
             "focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-cornsilk-700 focus-visible:ring-offset-0",

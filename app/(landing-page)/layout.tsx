@@ -1,6 +1,12 @@
-import { Header } from '@/app/(landing-page)/_components/header';
-import { Hero } from '@/app/(landing-page)/_components/hero';
-import { NavigationBar } from '@/app/(landing-page)/_components/navigation-bar';
+"use client";
+
+import { Discover } from "@/app/(landing-page)/_components/discover";
+import { Example } from "@/app/(landing-page)/_components/example";
+import { Features } from "@/app/(landing-page)/_components/features";
+import { Footer } from "@/app/(landing-page)/_components/footer";
+import { Header } from "@/app/(landing-page)/_components/header";
+import { Hero } from "@/app/(landing-page)/_components/hero";
+import { NavigationBar } from "@/app/(landing-page)/_components/navigation-bar";
 
 const LandingPageLayout = () => {
   const currentYear = new Date().getFullYear();
@@ -10,16 +16,29 @@ const LandingPageLayout = () => {
       <div>
         <NavigationBar />
         <div className="pt-20">
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center">
-              <Header />
-              <Hero />
+          <section>
+            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+              <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-center">
+                <Header />
+                <Hero />
+              </div>
             </div>
-            <footer className="mt-8 text-center text-sm text-gray-800 dark:text-gray-100 md:text-base">
-              Copyright &copy; {currentYear} Neil Ivan Orencia. All rights
-              reserved.
-            </footer>
-          </div>
+          </section>
+
+          <section
+            id="scroll-section"
+            className="bg-gradient-to-br from-cornsilk-50 via-cornsilk-200 to-cornsilk-400 dark:from-[#24205A] dark:via-[#38137C] dark:to-[#1F3270]"
+          >
+            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+              <Discover />
+              <Features />
+            </div>
+          </section>
+
+          <section className="mx-auto max-w-7xl p-2 sm:p-4 lg:p-6">
+            <Example />
+            <Footer currentYear={currentYear} />
+          </section>
         </div>
       </div>
     </div>

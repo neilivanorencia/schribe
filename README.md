@@ -217,3 +217,7 @@ Schribe is a minimalistic note-taking web application for capturing and organizi
 ```
 
 </details>
+
+## Acknowledgment
+
+Illustrations in this project were adapted from [Storyset](https://storyset.com/) under a Creative Commons license. Specific assets were modified to align with the project's theme.

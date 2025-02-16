@@ -3,11 +3,14 @@
 import { Discover } from "@/app/(landing-page)/_components/discover";
 import { Example } from "@/app/(landing-page)/_components/example";
 import { Features } from "@/app/(landing-page)/_components/features";
+import { Footer } from "@/app/(landing-page)/_components/footer";
 import { Header } from "@/app/(landing-page)/_components/header";
 import { Hero } from "@/app/(landing-page)/_components/hero";
 import { NavigationBar } from "@/app/(landing-page)/_components/navigation-bar";
 
 const LandingPageLayout = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cornsilk-200 via-cornsilk-400 to-cornsilk-600 dark:from-indigo-950 dark:via-violet-950 dark:to-blue-950">
       <div>
@@ -34,6 +37,7 @@ const LandingPageLayout = () => {
 
           <section className="mx-auto max-w-7xl p-2 sm:p-4 lg:p-6">
             <Example />
+            <Footer currentYear={currentYear} />
           </section>
         </div>
       </div>

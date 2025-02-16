@@ -43,7 +43,7 @@ Schribe is a minimalistic note-taking web application for capturing and organizi
 
 ## Features
 
-- **Dual Theme System** -  Offers a dual theme system to accommodate user preferences and viewing environments.  A cornsilk light theme provides a bright, aesthetically-looking interface suitable for well-lit conditions, while an indigo dark theme reduces eye strain in low-light settings.
+- **Dual Theme System** - Offers a dual theme system to accommodate user preferences and viewing environments. A cornsilk light theme provides a bright, aesthetically-looking interface suitable for well-lit conditions, while an indigo dark theme reduces eye strain in low-light settings.
 
 <details>
   <summary>See screenshot</summary><br>
@@ -51,21 +51,21 @@ Schribe is a minimalistic note-taking web application for capturing and organizi
 <img src="https://i.imgur.com/yrDa7p7.png" alt="Schribe Dark Theme" />
 </details>
 
-- **Block-Based Content Architecture** - Powered by Blocknotes, the web application employs a block-based architecture that structures content into independent modules. This design allows for granular content manipulation to enable users to rearrange paragraphs, headings, and media.  Editing and formatting blocks individually ensures an efficient workflow and maintains the structural integrity of the document throughout the writing process.
+- **Block-Based Content Architecture** - Powered by Blocknotes, the web application employs a block-based architecture that structures content into independent modules. This design allows for granular content manipulation to enable users to rearrange paragraphs, headings, and media. Editing and formatting blocks individually ensures an efficient workflow and maintains the structural integrity of the document throughout the writing process.
 
 <details>
   <summary>See screenshot</summary><br>
 <img src="https://i.imgur.com/d4AvxH3.png" alt="Schribe Block-Based Content Architecture" />
 </details>
 
-- **Text Formatting Palette** - Provides a comprehensive suite of text formatting options to enrich note composition. Users can structure content with three distinct heading levels, create organized lists using numbered and bulleted formats, manage tasks with checklists, and compose paragraphs.  The inclusion of image embedding and emoji support further enhances expressive and visually engaging note-taking.
+- **Text Formatting Palette** - Provides a comprehensive suite of text formatting options to enrich note composition. Users can structure content with three distinct heading levels, create organized lists using numbered and bulleted formats, manage tasks with checklists, and compose paragraphs. The inclusion of image embedding and emoji support further enhances expressive and visually engaging note-taking.
 
 <details>
   <summary>See screenshot</summary><br>
 <img src="https://i.imgur.com/eFkp9Rp.png" alt="Schribe Text Formatting Palette" />
 </details>
 
-- **Hierarchical Document Nesting** -  To facilitate advanced organization, the web application supports nested documents. This feature enables users to establish hierarchical relationships between notes, categorizing topics and subtopics effectively.  Nested documents contribute to a more structured and easily navigable knowledge base, particularly beneficial for extensive note collections.
+- **Hierarchical Document Nesting** - To facilitate advanced organization, the web application supports nested documents. This feature enables users to establish hierarchical relationships between notes, categorizing topics and subtopics effectively. Nested documents contribute to a more structured and easily navigable knowledge base, particularly beneficial for extensive note collections.
 
 <details>
   <summary>See screenshot</summary><br>
@@ -94,3 +94,126 @@ Schribe is a minimalistic note-taking web application for capturing and organizi
 - **shadcn/ui** - A UI component library specifically designed for building user interfaces in web applications using React.
 - **Tailwind CSS** - A utility-first CSS framework that allows for quick and flexible styling using predefined classes.
 - **Typescript** - A strongly typed programming language that builds on JavaScript by adding static types.
+
+## Project Structure
+
+<details>
+  <summary>See project structure here</summary>
+
+```plaintext
+└── 📁.vscode
+    └── settings.json
+└── 📁app
+    └── 📁(landing-page)
+        └── 📁_components
+            └── discover.tsx
+            └── example.tsx
+            └── features.tsx
+            └── footer.tsx
+            └── header.tsx
+            └── hero.tsx
+            └── logo.tsx
+            └── navigation-bar.tsx
+        └── layout.tsx
+        └── page.tsx
+    └── 📁(main)
+        └── 📁_components
+            └── banner.tsx
+            └── document-list.tsx
+            └── item.tsx
+            └── menu.tsx
+            └── navigation-bar.tsx
+            └── navigation.tsx
+            └── publish.tsx
+            └── title.tsx
+            └── trash.tsx
+            └── user-item.tsx
+        └── 📁(routes)
+            └── 📁documents
+                └── 📁[documentId]
+                    └── layout.tsx
+                    └── page.tsx
+                └── page.tsx
+        └── layout.tsx
+    └── 📁(public)
+        └── 📁(routes)
+            └── 📁preview
+                └── 📁[documentId]
+                    └── layout.tsx
+                    └── page.tsx
+        └── layout.tsx
+    └── 📁api
+        └── 📁edgestore
+            └── 📁[...edgestore]
+                └── route.ts
+    └── 📁fonts
+        └── GeistMonoVF.woff
+        └── GeistVF.woff
+    └── error.tsx
+    └── globals.css
+    └── layout.tsx
+└── 📁components
+    └── 📁modals
+        └── confirm-delete.tsx
+        └── confirm-restore.tsx
+        └── cover-image-modal.tsx
+        └── settings-modal.tsx
+    └── 📁ui
+        └── alert-dialog.tsx
+        └── avatar.tsx
+        └── button.tsx
+        └── command.tsx
+        └── dialog.tsx
+        └── dropdown-menu.tsx
+        └── input.tsx
+        └── label.tsx
+        └── popover.tsx
+         └── skeleton.tsx
+      └── sonner.tsx
+    └── convex-provider.tsx
+    └── cover.tsx
+    └── editor.module.css
+    └── editor.tsx
+    └── emoji-picker.module.css
+    └── emoji-picker.tsx
+    └── modal-provider.tsx
+    └── mode-toggle.tsx
+    └── search-command.tsx
+    └── single-image-dropdown.tsx
+    └── theme-provider.tsx
+    └── toolbar.tsx
+    └── word-counter.tsx
+└── 📁convex
+    └── 📁_generated
+        └── api.d.ts
+        └── api.js
+        └── dataModel.d.ts
+        └── server.d.ts
+        └── server.js
+    └── auth.config.ts
+    └── documents.ts
+    └── schema.ts
+└── 📁hooks
+    └── use-cover-image.tsx
+    └── use-origin.tsx
+    └── use-search.tsx
+    └── use-settings.tsx
+└── 📁lib
+    └── edgestore.ts
+    └── utils.ts
+└── 📁public
+└── .eslintrc.json
+└── .gitignore
+└── components.json
+└── LICENSE
+└── next.config.mjs
+└── package-lock.json
+└── package.json
+└── postcss.config.mjs
+└── prettier.config.js
+└── README.md
+└── tailwind.config.ts
+└── tsconfig.json
+```
+
+</details>
